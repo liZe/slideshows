@@ -1,0 +1,87 @@
+<section>
+  <h1>Traitement de données avec Python</h1>
+  <p><a href="https://yabz.fr/">Guillaume Ayoub</a> − 2021/2022</p>
+</section><section>
+  <ol>
+    <li>Présentation</li>
+    <li>NumPy</li>
+    <li>Matplotlib</li>
+    <li>Pour aller plus loin</li>
+  </ol>
+</section><section>
+  <h2>Présentation</h2>
+</section><section>
+  <a href="https://numpy.org/case-studies/blackhole-image/">
+    <img src="static/black_hole.jpg" style="max-height: 70vh" title="Katie Bouman" loading="lazy" />
+  </a>
+</section><section>
+  <h3>Histoire</h3>
+  <p>Python a très vite été un langage de choix pour la communauté scientifique. Sa syntaxe simple couplée à la puissance d’un langage de programmation complet en ont fait un outil de choix pour le traitement de données.</p>
+  <p>Une multitude de bibliothèques libres ont été créées depuis les années 2000 pour pallier la lenteur et la limitation technique du langage et de sa bibliothèque standard.</p>
+</section><section>
+  <h3>Applications</h3>
+  <p>Python propose des outils massivement utilisés dans un grand nombre de domaines scientifiques :</p>
+  <ul>
+    <li>l’analyse mathématique,</li>
+    <li>l’analyse statistique,</li>
+    <li>la visualisation,</li>
+    <li>le traitement d’image,</li>
+    <li>le traitement du signal,</li>
+    <li>le <em>machine-learning</em>…</li>
+  </ul>
+</section><section>
+  <h2>NumPy</h2>
+</section><section>
+  <h3>Fonctionnalités</h3>
+  <p>NumPy ajoute principalement à Python la possibilité de gérer des tableaux de données et des matrices, de manière pratique et efficace.</p>
+  <p>La bibliothèque apporte également une série d’outils permettant d’appliquer des fonctions mathématiques à ces structures de données.</p>
+</section><section>
+  <h3>Histoire</h3>
+  <p>NumPy a été créé au sein de SciPy, en 2006, à la suite de différentes implémentations nées au milieu des années 90.</p>
+  <p>La bibliothèque est aujourd’hui à la base de la majorité des outils dédiés à la manipulation de données.</p>
+</section><section>
+  <h3>Exemple</h3>
+  <pre><code class="python hljs">
+import numpy as np
+matrix = np.arange(12).reshape(4, 3)
+print(matrix)
+
+# [[ 0  1  2]
+#  [ 3  4  5]
+#  [ 6  7  8]
+#  [ 9 10 11]]
+  </code></pre>
+</section><section>
+  <h2>Matplotlib</h2>
+</section><section>
+  <h3>Fonctionnalités</h3>
+  <p>Matplotlib propose une série d’outils pour visualiser des jeux de données par la création de graphiques.</p>
+  <p>La bibliothèque est connue pour être flexible, simple à prendre en main, et extrêmement puissante pour les représentations complexes. Elle est construite pour être utilisée avec NumPy et SciPy.</p>
+</section><section>
+  <h3>Histoire</h3>
+  <p>Matplotlib a été créé en 2003, avec pour but de proposer une boîte à outils complète de visualisation de données.</p>
+  <p>Parmi la longue liste d’outils de créations de graphiques, Matplotlib est sans doute celle qui est la plus utilisée dans la communauté scientifique.</p>
+</section><section>
+  <h3>Exemple</h3>
+  <pre><code class="python hljs">
+import matplotlib.pyplot as plt
+plt.plot([1, 2, 3, 4])
+plt.ylabel('some numbers')
+plt.show()
+  </code></pre>
+  <img src="static/matplotlib.png" style="max-height: 30vh" loading="lazy" />
+</section><section>
+  <h2>Pour aller plus loin</h2>
+</section><section>
+  <h3>Autres bibliothèques</h3>
+  <p>Les outils de traitement de données sont extrêmement nombreux dans l’écosystème Python.</p>
+  <p>Outre NumPy, SciPy et Matplotlib dont nous avons déjà parlé, on notera parmi les plus connus Pandas et la suite Scikit.</p>
+  <p>Jupyter est également très largement utilisé pour réaliser des pages interactives pouvant intégrer du code et des graphiques.</p>
+</section><section>
+  <h3>Liens utiles</h3>
+  <ul>
+    <li><a href="https://numpy.org/">NumPy</a>, <a href="https://scipy.org/">SciPy</a>, <a href="https://matplotlib.org/">Matplotlib</a></li>
+    <li><a href="https://jupyter.org/">Jupyter</a>, créateurs de <em>notebooks</em> interactifs</li>
+    <li><a href="https://courspython.com/">CoursPython</a>, une introduction à Python pour les sciences</li>
+  </ul>
+</section>

@@ -1,0 +1,407 @@
+<section>
+  <h1>Feuilles de style avec CSS</h1>
+  <p>Guillaume Ayoub − IPI − Août 2019</p>
+</section><section>
+  <ol>
+    <li>Encore de l'histoire</li>
+    <li>Fonctionnement général</li>
+    <li>Liens avec le contenu</li>
+    <li>Cascade</li>
+    <li>Flot</li>
+    <li>Structure</li>
+  </ol>
+</section><section>
+  <h2>Histoire</h2>
+</section><section>
+  <h3>Développement parallèle à HTML</h3>
+  <p>
+    Les feuilles de style sont présentes dans les premiers navigateurs web,
+    avec l'invention de HTML.
+  </p>
+  <p>
+    On n'utilise pas encore CSS, mais les premiers attributs de présentation
+    sont introduits dans Netscape autour de 1995, tout comme les premières
+    tentatives de feuilles externes et les langages programmation dédiés au
+    style.
+  </p>
+</section><section>
+  <h3>Questions existentielles</h3>
+  <p>Doit-on :</p>
+  <ul>
+    <li>faire de HTML un langage de structuration et un langage de mise en forme ?</li>
+    <li>créer un langage de description du style, ou un langage de programmation du style ?</li>
+    <li>donner la priorité du style à l'auteur des pages, à l'auteur des navigateurs ou aux utilisateurs ?</li>
+  </ul>
+</section><section>
+  <h2>Fonctionnement général</h2>
+</section><section>
+  <h3>Syntaxe</h3>
+  <pre><code class="css hljs">
+<span class="hljs-comment"><span class="hljs-comment">/* Feuille de style */</span></span>
+
+<span class="hljs-selector-tag"><span class="hljs-selector-tag">body</span></span> { <span class="hljs-attribute"><span class="hljs-attribute">background-color</span></span>: green }
+
+<span class="hljs-selector-tag"><span class="hljs-selector-tag">p</span></span> {
+    <span class="hljs-attribute"><span class="hljs-attribute">color</span></span>: red;
+    <span class="hljs-attribute"><span class="hljs-attribute">font-size</span></span>: <span class="hljs-number"><span class="hljs-number">20px</span></span>;
+}
+
+<span class="hljs-selector-tag"><span class="hljs-selector-tag">p</span></span><span class="hljs-selector-pseudo"><span class="hljs-selector-pseudo">:hover</span></span>, <span class="hljs-selector-tag"><span class="hljs-selector-tag">a</span></span> { <span class="hljs-attribute"><span class="hljs-attribute">background-color</span></span>: purple }
+
+*<span class="hljs-selector-pseudo"><span class="hljs-selector-pseudo">::selection</span></span> { <span class="hljs-attribute"><span class="hljs-attribute">background-color</span></span>: yellow }
+  </code></pre>
+</section><section>
+  <h3>Déclarations</h3>
+  <p>
+    Les déclarations sont regroupées en blocs, délimités par des accolades.
+  </p>
+  <p>
+    Chaque déclaration est composée de deux parties séparées par un
+    deux-points : la propriété et les valeurs. On peut avoir une ou plusieurs
+    valeurs, généralement séparées par une espace.
+  </p>
+  <p>
+    Les déclarations sont séparées par un point-virgule.
+  </p>
+</section><section>
+  <h3>Sélecteurs</h3>
+  <p>
+    Pour chaque bloc de déclarations, une liste de sélecteurs (séparés par une
+    virgule) définit les balises HTML sur lesquels ces déclarations
+    s'appliquent.
+  </p>
+  <p>
+    Les sélecteurs peuvent être simples (par type, attribut, classe,
+    identifiant, etc.) ou combinés (à l'aide de
+    l'espace, <code>+</code>, <code>></code>, etc).
+  </p>
+</section><section>
+  <h3>Pseudo-classes</h3>
+  <p>
+    Un sélecteur peut contenir une ou plusieurs pseudo-classes, qui permettent
+    de filtrer plus précisément les balises ciblés.
+  </p>
+  <p>
+    Les pseudo-classes commencent par un deux-points.
+  </p>
+</section><section>
+  <h3>Pseudo-éléments</h3>
+  <p>
+    Un sélecteur peut contenir un pseudo-élément, qui permet de cibler une
+    partie du contenu d'une balise ou d'ajouter du contenu à
+    cette balise.
+  </p>
+  <p>
+    Les pseudo-classes commencent par deux deux-points.
+  </p>
+</section><section>
+  <h2>Liens avec le contenu</h2>
+</section><section>
+  <h3>Structuration du contenu</h3>
+  <p>
+    Le contenu doit être structuré par rapport au sens qu'il a, pas par rapport
+    à la façon dont on veut le présenter.
+  </p>
+  <p>
+    Il est facile à court terme de changer la structuration du contenu, mais
+    ces changements sont dangereux à long terme.
+  </p>
+  <p>
+    Il existe des solutions pour résoudre la majorité des problèmes de manière
+    intelligente et maintenable, en pré-processing ou directement en CSS.
+  </p>
+</section><section>
+  <h3>Cohérence</h3>
+  <p>
+    On doit réfléchir globalement à l'application et choisir une structuration
+    cohérente, partagée si possible par l'ensemble des pages.
+  </p>
+  <p>
+    Les choix stratégiques doivent être faits et suivis lors de la création et
+    de l'évolution du contenu, sur l'utilisation des identifiants et des
+    classes par exemple.
+  </p>
+</section><section>
+  <h3>Simplicité</h3>
+  <p>
+    L'utilisation des étiquettes adéquates offre des fonctionnalités sans avoir
+    à ajouter de code.
+  </p>
+</section><section>
+  <h2>Cascade</h2>
+</section><section>
+  <h3>Origine des feuilles de style</h3>
+  <p>Les feuilles de style utilisées ont trois origines possibles :</p>
+  <ul>
+    <li>L’auteur du contenu (<em>author</em>)</li>
+    <li>L’utilisateur du navigateur (<em>user</em>)</li>
+    <li>Le navigateur (<em>user agent</em>)</li>
+  </ul>
+</section><section>
+  <h3>Cascade</h3>
+  <p>La cascade est effectuée en suivant des étapes simples :</p>
+  <ul>
+    <li>on récupère les déclarations qui correspondent à l’élément ;</li>
+    <li>
+      on range les déclarations par importance (<em>user
+      agent</em>, <em>user</em>, <em>author</em>, <em>author
+      important</em>, <em>user important</em>) ; <em>user agent
+      important</em>);
+    </li>
+    <li>on range les déclarations par spécificité ;</li>
+    <li>on range les éléments par ordre de déclaration.</li>
+  </ul>
+</section><section>
+  <h3>Spécificité</h3>
+  <p>La spécificité des sélecteurs est définie sur 4 niveaux :</p>
+  <ul>
+    <li>le premier est à 1 si la déclaration utilise l’attribut « style » ;</li>
+    <li>le second est le nombre de sélecteurs par identifiant ;</li>
+    <li>le troisième est le nombre de sélecteurs par classe ;</li>
+    <li>le quatrième est le nombre de noms d’étiquettes et de pseudo-sélecteurs.</li>
+  </ul>
+  <p>
+    On départage ensuite les sélecteurs selon le premier niveau, puis le deuxième, puis le troisième, puis le quatrième.
+  </p>
+</section><section>
+  <h3><em>Reset</em></h3>
+  <p>
+    Les feuilles de style de <em>reset</em> ont pour but d’annuler les règles
+    <em>user agent</em> et <em>user</em> sans interférer avec les règles
+    <em>author</em>.
+  </p>
+  <p>
+    De plus en plus, les navigateurs utilisent uniquement des règles CSS pour
+    gérer l’affichage de tous les éléments, y compris les formulaires. Il est
+    donc en théorie (mais pas en pratique) possible d’arriver au même rendu sur
+    tous les navigateurs.
+  </p>
+  <p>
+    Pourtant, <strong>on ne veut pas enlever toutes les règles</strong>, on
+    veut juste éviter que la feuille ne fonctionne pas à cause d'une règle
+    implicite du <em>user agent</em>. L'important est donc de bien connaître
+    ces règles et de bien comprendre comment elles fonctionnent avant
+    d’utiliser (ou pas) une feuille de <em>reset</em>.
+  </p>
+</section><section>
+  <h2>Flot</h2>
+</section><section>
+  <h3>Fonctionnement du flot</h3>
+  <p>
+    Les boîtes dans le flot (<em>flow</em>) normal appartiennent à un contexte,
+    soit en lignes (<em>inline</em>), soit en blocs (<em>block</em>).
+  </p>
+  <p>
+    Dans les contextes en lignes, les éléments sont disposés horizontalement et
+    séparés en lignes. Dans les contextes en blocs, les éléments sont disposés
+    verticalement.
+  </p>
+  <p>
+    Certains éléments sortent du flot : les éléments de tables, les éléments
+    flottants, les éléments positionnés en absolu, les éléments flexibles…
+  </p>
+</section><section>
+  <h3>Affichage</h3>
+  <p>
+    La propriété d’affichage (<em>display</em>) détermine comment l’élément se
+    situe dans les contextes et comment il est mis en page (et affiché).
+  </p>
+  <ul>
+    <li>
+      <em>inline</em> (défaut) : dans un contexte en ligne, générant des boîtes
+      de lignes ;
+    </li>
+    <li>
+      <em>block</em> : dans un contexte de bloc, générant une boîte bloc ;
+    </li>
+    <li>
+      <em>inline-block</em> : dans un contexte en ligne, générant une boîte
+      bloc ;
+    </li>
+    <li>
+      <em>list-item</em> : dans un contexte de bloc, créant une boîte de puce
+      et une boîte bloc ;
+    </li>
+    <li>
+      <em>none</em> : élément enlevé.
+    </li>
+  </ul>
+  <p>Certaines valeurs créent des contextes particuliers :</p>
+  <ul>
+    <li>
+      <em>table</em> et <em>inline-table</em> : contexte de boîtes de
+      tableaux ;
+    </li>
+    <li>
+      <em>flex</em> et <em>inline-flex</em> : contexte de boîtes flexibles.
+    </li>
+    <li>
+      <em>grid</em> et <em>inline-grid</em> : contexte de grilles.
+    </li>
+  </ul>
+</section><section>
+  <h3>Position</h3>
+  <p>
+    L’attribut de position (<em>position</em>) détermine comment l’élément est
+    positionné par défaut, et comment il peut être repositionné (en utilisant les
+    propriétés <em>top</em>, <em>bottom</em>, <em>left</em>, <em>right</em>).
+  </p>
+  <ul>
+    <li>
+      <em>static</em> (par défaut) : l’élément est positionné dans le flot et
+      non repositionnable ;
+    </li>
+    <li>
+      <em>relative</em> : l’élément est positionné dans le flot et peut être
+      repositionné par rapport à sa position initiale ;
+    </li>
+    <li>
+      <em>absolute</em> : l’élément est sorti du flot, positionné dans le flot
+      et peut être repositionné par rapport à son bloc conteneur (qui est le
+      premier ancêtre dont la position n’est pas <em>static</em>) ;
+    </li>
+    <li>
+      <em>fixed</em> : l’élément est sorti du flot, positionné dans le flot et
+      peut être repositionné par rapport à son bloc conteneur (la vue pour les
+      médias continus, la page pour les médias paginés).
+    </li>
+  </ul>
+</section><section>
+  <h3>Flottaison</h3>
+  <p>
+    L’attribut de flottaison (<em>float</em>) permet de positionner les
+    éléments à droite ou à gauche de la ligne à laquelle ils appartiennent. Ces
+    éléments sont gérés dans un flot à part, collés les uns aux autres avec
+    retour à la ligne.
+  </p>
+</section><section>
+  <h3>Débordement</h3>
+  <p>
+    La propriété de débordement (<em>overflow</em>) détermine comment sont
+    traités les zones des éléments qui sortent de leur bloc parent.
+  </p>
+  <ul>
+    <li>visible (défault) : les zones extérieures sont affichées ;</li>
+    <li>hidden : les zones extérieures sont cachées ;</li>
+    <li>scroll : des barres de défilement sont proposées pour accéder aux zones extérieures ;</li>
+    <li>auto : le navigateur fait ce qu’il peut pour afficher les zones extérieures, et en particulier il peut intégrer les éléments flottants.</li>
+  </ul>
+</section><section>
+  <h3>Pseudo-éléments</h3>
+  <p>Les pseudo-éléments ajoutent des étiquettes fictionnelles dans l’élément auquel ils sont rattachés.</p>
+  <p>
+    <em>first-line</em> et <em>first-letter</em> ajoutent des étiquettes qui
+    englobent la première ligne et la première lettre.
+  </p>
+  <p>
+    <em>before</em> et <em>after</em> ajoutent des étiquettes en début et fin
+    d’élément, le contenu de ces éléments peut être indiqué avec la
+    propriété <em>content</em>.</p>
+</section><section>
+  <h3>Tableaux</h3>
+  <p>
+    Les règles de calcul des tailles des cellules, lignes et colonnes des
+    tableaux ne sont pas complètement spécifiées et sont généralement
+    complexes. Quoi qu’il en soit, certaines règles sont toujours respectées :
+  </p>
+  <ul>
+    <li>les cellules ne sortent pas du tableau ;</li>
+    <li>les lignes prennent toute la hauteur, les colonnes toute la largeur ;</li>
+    <li>le contenu des cellules peut être aligné verticalement (avec <em>vertical-align</em>).</li>
+  </ul>
+</section><section>
+  <h3>Grilles</h3>
+</section><section>
+  <h2>Structure</h2>
+</section><section>
+  <h3>Choix de la structure principale</h3>
+  <p>
+    La structure principale de la page doit être choisie selon les besoins
+    théorique d’affichage et de redimensionnement :
+  </p>
+  <ul>
+    <li>
+      le flot convient aux contenus classiques et aux éléments de présentation
+      à taille et position fixes, lorsque les dimensions de la page s’adaptent
+      plutôt au contenu ;
+    </li>
+    <li>
+      la disposition en tableaux convient lorsque toutes les lignes et les
+      cellules correspondent à un découpage logique, lorsque les dimensions de
+      la page s’adaptent parfaitement au contenu ;
+    </li>
+    <li>
+      la disposition en boîtes flottantes convient lorsque les dimensions de la
+      page s’adaptent lâchement au contenu ;
+    </li>
+    <li>
+      la disposition en grille convient lorsque les dimensions du contenu
+      s’adaptent à la taille de la page et des éléments de présentation.
+    </li>
+  </ul>
+</section><section>
+  <h3>Logiques de redimensionnement</h3>
+  <p>
+    Appréhender les logiques de redimensionnement dès le début du développement
+    est une bonne manière de théoriser la structure et de séparer ce qui est
+    immuable de ce qui est variable.
+  </p>
+  <p>
+    Le développement d’abord pour les mobiles (<em>mobile first</em>) encourage
+    à minimiser le contenu et la présentation, et donc à comprendre que la
+    majorité des mises en page sont en réalité variables et non immuables.
+  </p>
+</section><section>
+  <h3>Choix des unités</h3>
+  <p>
+    Une grande partie des tailles est dépendante de la taille du texte
+    (<em>em</em>, <em>ex</em>, <em>ch</em>, <em>rem</em>).
+  </p>
+  <p>
+    Les tailles fixes destinées aux écrans doivent être en unités absolues
+    d’angle visuel (<em>px</em>).
+  </p>
+  <p>
+    Les tailles fixes destinées à l’impression doivent être en unités absolues
+    physiques
+    (<em>cm</em>, <em>mm</em>, <em>q</em>, <em>in</em>, <em>pc</em>, <em>pt</em>).
+  </p>
+  <p>
+    Les tailles dépendantes de la vue doivent être en pourcentages de la vue
+    (<em>vw</em>, <em>vh</em>, <em>vmin</em>, <em>vmax</em>).
+  </p>
+  <p>
+    Les tailles dépendantes de la taille du parent doivent être en pourcentages
+    (<em>%</em>).
+  </p>
+</section><section>
+  <h3>Médias continus et paginés</h3>
+  <p>
+    Les médias CSS sont séparés en deux groupes : les médias continus (une
+    seule page dont la taille s’adapte au contenu) et les médias paginés
+    (plusieurs pages où le contenu est découpé de manière intelligente).
+  </p>
+  <p>
+    Comme pour les tailles de vues, la prise en compte de plusieurs médias tôt
+    dans le développement permet de théoriser la structure et d’en améliorer la
+    flexibilité et l’évolutivité.
+  </p>
+</section><section>
+  <h2>Liens</h2>
+  <h3>Spécification</h3>
+  <ul>
+    <li>
+      <a href="https://www.w3.org/Style/CSS/current-work">CSS
+      </a>
+    </li>
+  </ul>
+  <h3>Documentation</h3>
+  <ul>
+    <li>
+      <a href="https://developer.mozilla.org/docs/Web/CSS">MDN</a>
+    </li>
+    <li>
+      <a href="http://caniuse.com/">Can I use</a>
+    </li>
+  </ul>
+</section>

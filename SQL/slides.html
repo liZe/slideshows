@@ -1,0 +1,316 @@
+<section>
+  <h1>SQL</h1>
+  <p><a href="https://yabz.fr/">Guillaume Ayoub</a> − 2021/2022</p>
+</section>
+<section>
+  <ol>
+    <li>Présentation</li>
+    <li>Structures simples</li>
+    <li>Modification des données</li>
+    <li>Accès aux données</li>
+    <li>Structures complexes</li>
+    <li>Pour aller plus loin</li>
+  </ol>
+</section>
+<section>
+  <h2>Présentation</h2>
+</section>
+<section>
+  <h3>Naissance</h3>
+  <p>SQL est un langage développé à IBM dans les années 1970, par Donald D. Chamberlin et Raymond F. Boyce.</p>
+  <p>Les premières implémentations ont été commercialisées en 1979. D’autres implémentations se sont développées dans les années 1980, et surtout 1990.</p>
+</section>
+<section>
+  <h3>Structured Query Language</h3>
+  <p>SQL est un langage permettant de gérer des données dans une base de données relationnelle.</p>
+  <p>Il offre la possibilité de définir les structures de données, d’accéder aux données, de les modifier, et de gérer des droits d’accès.</p>
+</section>
+<section>
+  <h3>Norme</h3>
+  <p>SQL est une norme ISO depuis 1987.</p>
+  <p>Cette norme tend à favoriser l’interopérabilité entre les différents serveurs de bases de données. Cependant, aucune implémentation ne suit parfaitement la norme, et les différences sont souvent très importantes selon le logiciel utilisé.</p>
+</section>
+<section>
+  <h3>Implémentations</h3>
+  <p>De nombreuses implémentations existent, chacune avec ses forces et ses faiblesses. Parmi les principaux systèmes de gestion de bases de données relationnelles (SGBDR), on notera Oracle, MySQL, SQL Server, PostgreSQL, SQLite…</p>
+</section>
+<section>
+  <h3>Langage déclaratif</h3>
+  <p>SQL est un langage déclaratif, comme le sont les langages de programmation fonctionnelle (Lisp, Haskell…) ou logique (Prolog…)</p>
+  <p>Contrairement aux langages procéduraux, il vise à décrire le résultat que l’on souhaite sans décrire les algorithmes nécessaires à l’obtention de ce résultat.</p>
+</section>
+<section>
+  <h2>Structures simples</h2>
+</section>
+<section>
+  <h3>Tables</h3>
+  <p>Les tables, autrement appelées relations, sont la pierre angulaire des bases de données relationnelles. Elles visent à stocker les informations dans des tableaux à deux dimensions.</p>
+  <p>Chaque ligne est appelée un enregistrement, dont les colonnes sont appelées des attributs.</p>
+</section>
+<section>
+  <h3>Types de données</h3>
+  <p>SQL propose de stocker les données de types assez classiques :</p>
+  <p></p>
+  <ul>
+    <li>
+      entiers (<code>smallint</code>, <code>int</code>, <code>bigint</code>),
+    </li>
+    <li>
+      flottants (<code>real</code>, <code>double</code>),
+    </li>
+    <li>
+      décimaux (<code>numeric</code>),
+    </li>
+    <li>
+      temporels (<code>date</code>, <code>time</code>, <code>timestamp</code>, <code>interval</code>),
+    </li>
+    <li>
+      chaînes (<code>char</code>, <code>varchar</code>).
+    </li>
+  </ul>
+  <p>D’autres types sont supportés, mais généralement moins utilisés (binaire…) ou complexes (XML, JSON…).</p>
+</section>
+<section>
+  <h3>Schémas</h3>
+  <p>Les tables peuvent être regroupés dans des groupes appelés schémas, qui sont l’équivalent d’un espace de nommage.</p>
+</section>
+<section>
+  <h3>Contraintes</h3>
+  <p>Il est possible d’appliquer diverses contraintes aux données. Les données ne respectant pas ces contraintes ne sont pas acceptées dans la base</p>
+  <p>Le caractère transactionnel de la base de données (ACID) assure, grâce à des opérations atomiques, de toujours laisser le système dans un état cohérent. Les transactions n’ont pas d’influence les unes sur les autres, et elles apportent des changements permanents lorsqu’elles sont validées.</p>
+</section>
+<section>
+  <h3>Clés primaires</h3>
+  <p>Les clés primaires d’une table définissent un identifiant unique pour chaque ligne. Elles englobent une ou plusieurs colonnes.</p>
+</section>
+<section>
+  <h3>Clés étrangères</h3>
+  <p>Les clés étrangères permettent de référencer les clés primaires (ou les colonnes uniques non nulles) d’autres tables, pour établir un lien entre certains enregistrements de ces tables.</p>
+</section>
+<section>
+  <h3>Unicité</h3>
+  <p>Les colonnes peuvent avoir une contrainte d’unicité, assurant qu’une valeur (sur une ou plusieurs colonnes) ne peut être utilisée que pour un seul enregistrement.</p>
+</section>
+<section>
+  <h3>Création d’objets</h3>
+  <p>La création d’objets se fait grâce à la commande <code>CREATE</code>.</p>
+</section>
+<section>
+  <h3>Modification d’objets</h3>
+  <p>La modification d’objets est effectuée par la commande <code>ALTER</code>.</p>
+</section>
+<section>
+  <h3>Suppression d’objets</h3>
+  <p>On peut supprimer des objets avec la commande <code>DROP</code>.</p>
+</section>
+<section>
+  <h2>Modification des données</h2>
+</section>
+<section>
+  <h3>Ajout de données</h3>
+  <p>L’ajout d’un ou plusieurs enregistrements dans une relation se fait avec la commande <code>INSERT</code>.</p>
+</section>
+<section>
+  <h3>Ajout manuel de valeurs</h3>
+  <p>Il est possible d’indiquer manuellement les données à insérer en utilisant le mot <code>VALUES</code>, suivi de la liste des enregistrements.</p>
+</section>
+<section>
+  <h3>Ajout depuis une sous-requête</h3>
+  <p>Il est également possible d’ajouter des données venant d’autres tables grâce à des sous-requêtes.</p>
+</section>
+<section>
+  <h3>Mise-à-jour des données</h3>
+  <p>Il est possible de modifier des enregistrement avec la commande <code>UPDATE</code>.</p>
+</section>
+<section>
+  <h3>Mise-à-jour à partir d’une sous-requête</h3>
+  <p>Comme pour l’insertion, il est possible d’utiliser une sous-requête pour la mise-à-jour d’enregistrements.</p>
+</section>
+<section>
+  <h3>Suppression de données</h3>
+  <p>La suppression de lignes peut être faite avec la commande <code>DELETE</code>.</p>
+</section>
+<section>
+  <h3>Transactions</h3>
+  <p>Lorsque l’on veut assurer l’atomicité d’un groupe d’opérations, on utilise une transaction avec la commande <code>BEGIN TRANSACTION</code>.</p>
+  <p>Toutes les opérations effectuées depuis le début d’une transaction peuvent être soit annulés avec <code>ROLLBACK</code>, soit enregistrés avec <code>COMMIT</code>. La transaction empêche l’application partielle de modifications qui pourrait mettre à mal la cohérence des données.</p>
+</section>
+<section>
+  <h3>Points de sauvegarde</h3>
+  <p>Lors de transaction, il est possible de se prémunir d’éventuelles erreurs en utilisant des points de sauvegarde, avec la commande <code>SAVEPOINT</code>.</p>
+</section>
+<section>
+  <h2>Accès aux données</h2>
+</section>
+<section>
+  <h3>Sélection</h3>
+  <p>La commande permettant de sélectionner les données à afficher est la commande <code>SELECT</code>.</p>
+  <p>Cette commande est très complexe et offre une très large liste de possibilités et de fonctionnalités.</p>
+</section>
+<section>
+  <h3>Fonctions</h3>
+  <p>De nombreuses fonctions sont offertes pour traiter le contenu des enregistrements, que ce soit pour sélectionner ou pour filtrer.</p>
+</section>
+<section>
+  <h3>Alias</h3>
+  <p>Il est possible d’attribuer des alias à différents objets (tables, éléments sélectionnés, sous-requêtes…) grâce au mot-clé <code>AS</code>.</p>
+</section>
+<section>
+  <h3>Filtres</h3>
+  <p>Derrière le mot-clé <code>WHERE</code>, il est possible d’indiquer des conditions permettant de filtrer les lignes qui seront retournées. Ces conditions de filtrage sont appelées prédicats.</p>
+</section>
+<section>
+  <h3>Opérateurs de comparaison</h3>
+  <p>Les prédicats sont composés d’expressions soumises à une comparaison. Cette comparaison renvoie vrai ou faux, ce qui indique si une ligne est gardée ou non.</p>
+  <p>Conformément à la logique 3 états de SQL, elle peut également renvoyer <code>NULL</code> dans le cas où le calcul est impossible.</p>
+</section>
+<section>
+  <h3>Combinaison de prédicats</h3>
+  <p>Il est possible d’enchaîner les filtres avec les opérateurs <code>AND</code> et <code>OR</code>.</p>
+</section>
+<section>
+  <h3>Expressions régulières</h3>
+  <p>L’utilisation d’expression régulières pour filtrer des chaînes de caractères est possible avec l’opérateur <code>LIKE</code>.</p>
+</section>
+<section>
+  <h3>Intervalles et ensembles</h3>
+  <p>Il est possible de tester si des valeurs font partie d’un intervalle ou d’un ensemble, avec les opérateurs <code>BETWEEN</code> et <code>IN</code>.</p>
+</section>
+<section>
+  <h3>Tri</h3>
+  <p>Les lignes retournées peuvent être triées selon le contenu de certains de leurs attributs, avec le mot-clé <code>ORDER BY</code>.</p>
+</section>
+<section>
+  <h3>Limitation du nombre de lignes</h3>
+  <p>On peut décider de ne pas afficher toutes les lignes répondant favorablement aux filtres, en utilisant le mot <code>FETCH</code>.</p>
+  <p>La plupart des implémentations proposent également les syntaxes <code>LIMIT</code> et <code>OFFSET</code>. Ces mots ne font pas partie du standard.</p>
+</section>
+<section>
+  <h3>Regroupement de lignes</h3>
+  <p>Avec <code>GROUP BY</code>, il est possible de regrouper certaines lignes suivant une condition donnée. Les lignes alors obtenues peuvent contenir les valeurs utilisées pour le regroupement, ainsi que des agrégats des valeurs d’autres colonnes.</p>
+</section>
+<section>
+  <h3>Fonctions d’agrégat</h3>
+  <p>Il est possible d’agréger certaines valeurs des lignes regroupées, pour obtenir des sommes, moyennes, valeurs extrêmes…</p>
+</section>
+<section>
+  <h3>Filtrages de regroupements</h3>
+  <p>Tout comme <code>WHERE</code> permet de filtrer les lignes originales des tables, <code>HAVING</code> offre la possibilité de filtrer les lignes regroupées, en particulier sur les résultats des fonctions d’agrégats.</p>
+</section>
+<section>
+  <h3>Sous-requêtes</h3>
+  <p>Les sélections se font généralement sur les lignes de tables, mais elles peuvent également être effectuées sur le résultat d’autres requêtes, appelées sous-requêtes.</p>
+  <p>L’utilisation de sous-requêtes apporte une grande flexibilité et souvent une certaine facilité. Cependant, l’utilisation de véritables jointures est souvent à favoriser pour des questions de performances.</p>
+</section>
+<section>
+  <h3>Jointures</h3>
+  <p>Il est possible de joindre des tables en utilisant le mot-clé <code>JOIN</code>.</p>
+  <p>Les jointures permettent sur chaque ligne du résultat d’avoir les attributs de plusieurs tables, et offrent la possibilité de configurer la manière dont les lignes de tables différentes peuvent être reliées les unes aux autres.</p>
+</section>
+<section>
+  <h3>Conditions de jointures</h3>
+  <p>Les jointures permettent de construire des produits cartésiens (<code>CROSS JOIN</code>), des jointures internes (<code>INNER JOIN</code>) et des jointures externes (<code>OUTER JOIN</code>).</p>
+  <p>On exprime les conditions de jointures grâce à des prédicats (<code>ON</code>) ou simplement des noms de colonnes (<code>USING</code>).</p>
+</section>
+<section>
+  <h3>Tests de cas</h3>
+  <p>Comme dans beaucoup de langages, il est possible de construire des valeurs à l’aide de conditions. En SQL, on utilise <code>CASE</code> pour lister ces conditions et les valeurs correspondantes.</p>
+</section>
+<section>
+  <h3>Opérateurs ensemblistes</h3>
+  <p>En plus de la jointure qui permet de mettre les colonnes de différentes tables sur une même ligne, nous pouvons mettre les lignes de plusieurs requêtes dans un seul résultat avec <code>UNION</code>.</p>
+  <p>Les autres opérateurs ensemblistes classiques sont également disponibles : l’intersection avec <code>INTERSECT</code> et la différence avec <code>EXCEPT</code>.</p>
+</section>
+<section>
+  <h2>Structures complexes</h2>
+</section>
+<section>
+  <h3>Séquences</h3>
+  <p>Les séquences sont des objets qui génèrent des nombres selon une règle prédéfinie. Elles sont particulièrement utiles pour la génération d’identifiants</p>
+</section>
+<section>
+  <h3>Domaines</h3>
+  <p>Les domaines permettent de définir des types spécifiques, qui peuvent ensuite être affectés aux colonnes des relations.</p>
+  <p>Les domaines associent généralement un type de base et des conditions de validité.</p>
+  <p>D’autres types personnalisés peuvent être créés, notamment les types composites et les énumérations de chaînes de caractères.</p>
+</section>
+<section>
+  <h3>Valeurs par défaut</h3>
+  <p>On peut affecter aux colonnes une valeur par défaut, qui sera prise lorsqu’un nouvel enregistrement ne comprend pas de valeur pour cet attribut.</p>
+  <p>Ces valeurs peuvent être fixes (<code>DEFAULT</code>) ou générées à partir d’une expression (<code>GENERATED</code>).</p>
+</section>
+<section>
+  <h3>Vues</h3>
+  <p>Afin de simplifier l’accès aux données, ils est parfois utile de créer des vues, qui reprennent uniquement certaines colonnes ou certaines lignes d’une table plus complexe.</p>
+</section>
+<section>
+  <h3>Index</h3>
+  <p>Certaines opérations comme les filtres et les tris peuvent être particulièrement longues lorsque le volume de données est important.</p>
+  <p>Pour remédier à cela, ils est possible de créer des index qui améliorent grandement les performances de ces opérations.</p>
+</section>
+<section>
+  <h3>Routines</h3>
+  <p>Des fonctions et des procédures spécifiques peuvent être créées et utilisées pour traiter certaines valeurs.</p>
+  <p>La création de routines est généralement faite dans un langage procédural dédié (PL/SQL…) qui dépend de l’implémentation.</p>
+</section>
+<section>
+  <h3>Fonctions déclenchées</h3>
+  <p>Les fonctions déclenchées (triggers) sont des fonctions dont l’appel est automatiquement fait lorsque des lignes sont ajoutées, supprimées ou modifiées dans une table donnée.</p>
+  <p>Selon les cas d’usage, il est possible d’appeler la fonction avant ou après l’opération en base.</p>
+</section>
+<section>
+  <h3>Partitions</h3>
+  <p>Afin de réduire la taille des tables et de simplifier l’accès aux données, il est possible de partitionner les relations selon une condition précise. L’ajout d’une ligne dans la table mère ajoutera alors automatiquement une ligne dans la table fille selon les règles de ce partitionnement.</p>
+</section>
+<section>
+  <h2>Droits</h2>
+</section>
+<section>
+  <h3>Droits d’accès</h3>
+  <p>La gestion des utilisateurs et de leurs droits d’accès aux données se fait avec des objets et des commandes SQL classiques (<code>GRANT</code>, <code>REVOKE</code>). La gestion des droits d’accès est très variable selon le serveur de bases de données utilisé.</p>
+</section>
+<section>
+  <h2>Pour aller plus loin</h2>
+</section>
+<section>
+  <h3>L’importance du schéma</h3>
+  <p>La définition d’un schéma est la phase la plus importante d’un projet gérant des données. Le choix du schéma conditionne beaucoup de choix techniques et peut avoir une influence sur l’interface et l’utilisabilité du service.</p>
+  <p>Le schéma d’une base de données est sans doute l’élément le plus difficile à changer, parce que ses changements engendrent un grand nombre de modifications dans les requêtes à tous les niveaux de l’application.</p>
+</section>
+<section>
+  <h3>Un mot sur la normalisation</h3>
+  <p>Il existe différentes formes normales permettant d’améliorer le découpage et l’organisation des données dans une base de données.</p>
+  <p>Il n’est pas toujours possible, ni même souhaitable, d’atteindre les formes normales les plus élevées. Il est cependant utile de connaître les formes normales, et potentiellement de s’y conformer.</p>
+</section>
+<section>
+  <h3>Définition des contraintes</h3>
+  <p>Tout comme le schéma, les contraintes d’une base de données sont censées reproduire les contraintes imposées par l’applicatif métier.</p>
+  <p>Inclure un maximum de ces contraintes dans la base de données permet d’éviter les erreurs dans la partie applicative, et assure d’avoir des données toujours cohérentes.</p>
+</section>
+<section>
+  <h3>Tables avec clés et valeurs</h3>
+  <p>Dans beaucoup de projets, il peut être tentant de stocker des données hétérogènes dans une seule table afin d’éviter de créer trop de tables semblables.</p>
+  <p>Avoir des enregistrements hétérogènes dans une relation brise un des fondements des bases de données relationnelles et doit être évité au maximum.</p>
+  <p>Les bases de données offrent d’autres possibilités pour stocker des lignes dont la structure est variable (JSON, XML…)</p>
+</section>
+<section>
+  <h3>Choix de l’implémentation</h3>
+  <p>Les implémentations de SQL sont nombreuses et variées. La plupart sont de très bonne qualité. Chaque implémentation a ses forces et ses faiblesses qui doivent être rigoureusement prises en compte lors du choix du SGBDR.</p>
+</section>
+<section>
+  <h3>NoSQL</h3>
+  <p>Les bases de données non relationnelles existent depuis longtemps, mais une vague de nouveaux outils a émergé au début de ce siècle (REDIS, CouchDB, MongoDB, ElasticSearch…)</p>
+  <p>Ces bases de données NoSQL proposent de nombreux avantages : stockage sans schéma, stockage clé-valeur, vitesse, distribution… Il faut cependant noter qu’en perdant la rigidité du côté relationnel, elles en perdent souvent les avantages, et en particulier la cohérence des données.</p>
+</section>
+<section>
+  <h3>Liens utiles</h3>
+  <div>
+    <ul>
+      <li>Tutoriel SQLite avec base en ligne : <a href="https://www.sqlitetutorial.net/">SQLite Tutorial</a></li>
+      <li>Tutoriel PostgreSQL : <a href="https://www.postgresqltutorial.com/">PostgreSQL Tutorial</a></li>
+      <li>Formations PostgreSQL avec supports de cours libres : <a href="https://www.dalibo.com/formations">Dalibo</a></li>
+      <li>Apprendre à optimiser sa base de données : <a href="https://use-the-index-luke.com/">Use the index Luke</a></li>
+      <li>Tutoriel et référence SQL : <a href="https://www.postgresql.org/docs/">Documentation PostgreSQL</a></li>
+    </ul>
+  </div>
+</section>

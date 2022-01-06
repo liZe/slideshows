@@ -1,0 +1,227 @@
+<section>
+  <h1>Scripts web avec JavaScript</h1>
+  <p>Guillaume Ayoub − IPI − Août 2019</p>
+</section>
+
+
+
+<section>
+  <ol>
+    <li>Toujours un peu d'histoire</li>
+    <li>Bases de programmation</li>
+    <li>Interface du document</li>
+  </ol>
+</section>
+
+
+
+<section>
+  <h2>Un peu d'histoire</h2>
+</section>
+<section>
+  <h3>Naissance</h3>
+  <p>
+    En 1995, alors qu'une guerre des navigateurs s'annonce entre Netscape et
+    Microsoft, Netscape décide d'intégrer un langage dans son navigateur.
+  </p>
+  <p>
+    Ce langage est appelé JavaScript, pour créer une confusion avec Java, le
+    langage naissant avec le plus gros potentiel à l'époque.
+  </p>
+  <p>
+    JavaScript a depuis été normalisé sous le nom d'ECMAScript, et continue
+    d'évoluer avec de nouvelles versions régulières.
+  </p>
+</section>
+<section>
+  <h3>Utilisation</h3>
+  <p>
+    JavaScript a pour but d'apporter à HTML et CSS un modèle objet permettant
+    d'interagir avec le document. Le DOM (<em>Document Object Model</em>) est
+    une interface offrant de nombreuses possibilités de modifications
+    dynamiques du document.
+  </p>
+  <p>
+    JavaScript est initialement et majoritairement un langage exécuté côté
+    client, c'est-à-dire dans le navigateur.
+  </p>
+</section>
+
+
+
+<section>
+  <h2>Bases de programmation</h2>
+</section>
+<section>
+  <h3>Affichage dans la console</h3>
+  <p>
+    Il est possible d'afficher des éléments dans la console en utilisant la
+    fonction <code>console.log</code>.
+  </p>
+  <pre><code class="javascript">
+console.log(23);
+console.log('abc');
+  </code></pre>
+</section>
+<section>
+  <h3>Déclaration de variables</h3>
+  <p>
+    Comme dans la plupart des langages de programmation, il est possible de
+    déclarer des variables qui pourront être utilisées dans la suite du
+    programme.
+  </p>
+  <pre><code class="javascript">
+let number = 23;
+let string = 'abc';
+let obj = {lastname: 'Potter', firstname: 'Harry'};
+let list = ['Harry', 'Hermione', 'Ron'];
+
+console.log(number);
+console.log(string);
+console.log(obj);
+console.log(obj.firstname);
+console.log(list);
+console.log(list[2]);
+  </code></pre>
+</section>
+<section>
+  <h3>Opérations de base</h3>
+  <p>
+    Certaines opérations sont disponibles pour les types de base.
+  </p>
+  <pre><code class="javascript">
+console.log(2 + 3);
+console.log('a' + 'b');
+  </code></pre>
+</section>
+<section>
+  <h3>Conditions</h3>
+  <p>
+    Il est possible d'effectuer des blocs de code à certaines conditions.
+  </p>
+  <pre><code class="javascript">
+let number = 2;
+if (number > 3) {
+  console.log(number + ' is a big number');
+}
+number += 4;
+if (number > 5) {
+  console.log(number + ' is a very big number');
+}
+number += 5;
+if (number > 5 && number < 20) {
+  console.log(number + ' is a very big number, but not that big');
+}
+  </code></pre>
+</section>
+<section>
+  <h3>Boucles</h3>
+  <p>
+    Quand on a un objet qui contient différents éléments, on peut boucler sur
+    ces éléments pour les prendre un par un.
+  </p>
+  <pre><code class="javascript">
+let list = ['Harry', 'Hermione', 'Ron'];
+
+for (let i = 0; i < list.length; i++) {
+  console.log(list[i]);
+}
+  </code></pre>
+</section>
+<section>
+  <h3>Fonctions</h3>
+  <p>
+    Si des bouts de code doivent être appelés plusieurs fois, il est possible
+    de créer des fonctions auxquelles on peut passer des paramètres.
+  </p>
+  <pre><code class="javascript">
+function bigNumber(number) {
+  if (number > 5 && number < 20) {
+    console.log(number + ' is a big number, but not that big');
+  } else if (number <= 5) {
+    console.log(number + ' is a small number');
+  } else if (number >= 20) {
+    console.log(number + ' is a very big number');
+  }
+}
+bigNumber(4);
+bigNumber(60);
+bigNumber(10);
+  </code></pre>
+</section>
+
+
+<section>
+  <h2>Interface du document</h2>
+</section>
+<section>
+  <h3>Fonctionnement général</h3>
+  <p>
+    L'objet <code>document</code> correspond au DOM de votre document. Cet
+    objet possède de nombreuses fonctions qui permettent d'interagir avec le
+    document.
+  </p>
+  <p>
+    Les fonctions qui sont attachées à des objets sont appelées « méthodes ».
+  </p>
+</section>
+<section>
+  <h3>Sélection de nœuds</h3>
+  <p>
+    Il est possible de sélectionner des nœuds en utilisant les mêmes sélecteurs
+    qu'en CSS.
+  </p>
+  <pre><code class="javascript">
+const div = document.querySelector('div');
+console.log(div);
+
+console.log('---');
+
+const divs = document.querySelectorAll('div');
+for (let i = 0; i < divs.length; i++) {
+  console.log(divs[i]);
+}
+  </code></pre>
+</section>
+<section>
+  <h3>Modification de nœuds</h3>
+  <p>
+    Il est possible de modifier le contenu des nœuds qui sont sélectionnés.
+  <pre><code class="javascript">
+const div = document.querySelector('div');
+
+div.innerText = 'test';
+div.id = 'super-id';
+div.classList.add('super-class');
+div.setAttribute('data-attribute', 'value');
+  </code></pre>
+</section>
+<section>
+  <h3>Ajout et suppression de nœuds</h3>
+  <p>
+    Il est possible de créer des nœuds et de les ajouter dans le document.
+  </p>
+  <pre><code class="javascript">
+const div = document.querySelector('div');
+
+let paragraph = document.createElement('p');
+paragraph.innerText = 'wow';
+div.appendChild(paragraph);
+  </code></pre>
+</section>
+<section>
+  <h3>Événements</h3>
+  <p>
+    Les nœuds peuvent réagir à certains événements. On peut alors appeler
+    une fonction lorsque cet événement est déclenché.
+  </p>
+  <pre><code class="javascript">
+const div = document.querySelector('div');
+
+function changeText(event) {
+  event.target.innerText = 'clic';
+}
+
+div.addEventListener('click', changeText);
+  </code></pre>
+</section>

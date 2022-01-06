@@ -1,0 +1,675 @@
+<section>
+  <h1>Introduction à Python</h1>
+  <p><a href="https://yabz.fr/">Guillaume Ayoub</a> − 2021/2022</p>
+</section><section>
+  <ol>
+    <li>Présentation</li>
+    <li>Interpréteur & concepts de base</li>
+    <li>Bibliothèque standard</li>
+    <li>Environnements virtuels</li>
+    <li>Classes</li>
+    <li>Pour aller plus loin</li>
+  </ol>
+</section><section>
+  <h2>Présentation</h2>
+</section><section>
+  <code class="python"><a href="https://xkcd.com/353/">import antigravity</a></code>
+</section><section>
+  <h3>Histoire</h3>
+  <p>Python a été créé à la fin des années 80 par <a href="https://fr.wikipedia.org/wiki/Guido_van_Rossum">Guido van Rossum</a>.</p>
+  <p>Le nom est une référence aux <a href="https://fr.wikipedia.org/wiki/Monty_Python">Monty Python</a> (et pas du tout au serpent 🐍).</p>
+</section><section>
+  <h3>Syntaxe</h3>
+  <pre><code class="python hljs">
+numbers = (1, 2, 3)
+
+def double(number):
+    return number * 2
+
+for i in numbers:
+    print(double(i))
+  </code></pre>
+</section><section>
+  <h3>Avantages</h3>
+  <ul>
+    <li>Syntaxe simple et très lisible</li>
+    <li>Disponible sur toutes les plateformes</li>
+    <li>Adapté à des projets très variés</li>
+    <li>Très largement utilisé</li>
+  </ul>
+</section><section>
+  <h3>Inconvénients</h3>
+  <ul>
+    <li>Lent</li>
+    <li>Complexe à packager</li>
+    <li>Difficile à embarquer</li>
+    <li>Limité pour le <em><a href="https://fr.wikipedia.org/wiki/Multithreading">multithreading</a></em></li>
+  </ul>
+</section><section>
+  <h3>Bibliothèque standard</h3>
+  <p>
+    Python est fourni « piles incluses » 🔋, c’est-à-dire avec une bibliothèque
+    standard très fournie qui apporte de nombreuses fonctionnalités sans avoir
+    besoin de modules externes.
+  </p>
+  <p>
+    Python intègre de nombreux outils dont les fonctions mathématiques
+    avancées, des clients et protocoles réseaux les plus répandus, les
+    expressions régulières, les dates, la lecture et l’écriture de fichiers, la
+    parallélisation…
+  </p>
+</section><section>
+  <h2>Interpréteur & concepts de base</h2>
+</section><section>
+  <h3>Langage interprété</h3>
+  <p>
+    Python est un langage interprété, c’est-à-dire qu’il est directement
+    exécuté sans passer explicitement par un compilateur.
+  </p>
+  <p>
+    L’implémentation de référence de Python
+    (<a href="https://fr.wikipedia.org/wiki/CPython">CPython</a>) transforme à
+    la volée le code source en code binaire
+    (stocké dans un dossier <code class="python">.pyc</code>) qui
+    est transmis à une
+    <a href="https://fr.wikipedia.org/wiki/Machine_virtuelle#Machine_virtuelle_de_haut_niveau">machine virtuelle</a>.
+  </p>
+</section><section>
+  <h3>Interprétation et fichiers</h3>
+  <p>
+    L’interpréteur propose un terminal interactif permettant de saisir du code
+    directement.
+  </p>
+  <p>
+    Lorsqu’un fichier lui est transmis en paramètre, l’interpréteur exécute ce
+    fichier.
+  </p>
+</section><section>
+  <h3>Premières commandes</h3>
+</section><section>
+  <h3>Syntaxe de base</h3>
+  <p>
+    Python est un langage dont les blocs sont déterminés par l’indentation (4
+    espaces par convention). L’ouverture de blocs se fait par un deux-points.
+  </p>
+</section><section>
+  <h3>Commentaires</h3>
+  <p>
+    Les commentaires commencent par un croisillon et vont jusqu’à la fin de la
+    ligne.
+  </p>
+  <pre><code class="python hljs">
+# Ceci est un commentaire
+a = 1 + 2  # Ceci est aussi un commentaire
+  </code></pre>
+</section><section>
+  <h3>Nombres</h3>
+  <p>
+    Python propose comme types de base les nombres à virgule flottante
+    (<code class="python">float</code>), les entiers (<code class="python">int</code>) et les complexes
+    (<code class="python">complex</code>). Leur précision est automatiquement adaptée selon leur taille.
+  </p>
+  <pre><code class="python hljs">
+a = 12
+b = 123_456_789
+c = 1.2345
+d = 3 + 2j
+e = 10 ** 100000
+  </code></pre>
+  <p>
+    Les opérations de base utilisent les opérateurs classiques
+    (<code class="python">+</code>, <code class="python">-</code>, <code class="python">*</code>…).
+  </p>
+</section><section>
+  <h3>Chaînes de caractères</h3>
+  <p>
+    Les chaînes de caractères (<code class="python">str</code>) représentent des suites de
+    caractères Unicode.
+  </p>
+  <pre><code class="python hljs">
+name = 'Lulu'
+today = "Please, don't touch anything"
+hello = f'Salut {name}!'
+  </code></pre>
+  <p>
+    Le formatage permet d’intégrer des caractères ou d’autres objets dans une
+    chaîne, sans avoir besoin de les convertir ou des les concaténer.
+  </p>
+</section><section>
+  <h3>Conditions</h3>
+  <p>
+    Les blocs de test de conditions se font avec les mots
+    clés <code class="python">if</code>, <code class="python">else</code> et <code class="python">elif</code>.
+  </p>
+  <pre><code class="python hljs">
+a = 2
+
+if a == 0:
+    print('zero')
+elif a == 1:
+    print('one')
+else:
+    print('two or more')
+  </code></pre>
+</section><section>
+  <h3>Booléens</h3>
+  <p>
+    L’évaluation des conditions retourne les booléens
+    (<code class="python">bool</code>) <code class="python">True</code> ou <code class="python">False</code>.
+  </p>
+  <p>
+    De nombreux types de base proposent une évaluation binaire qui permet de
+    simplifier les conditions.
+  </p>
+  <p>
+    On peut utiliser les opérateurs binaires <code class="python">and</code>, <code class="python">or</code>
+    et <code class="python">not</code> pour enchaîner les comparaisons.
+  </p>
+</section><section>
+  <h3>Boucles</h3>
+  <p>
+    Les mots réservés <code class="python">for</code> et <code class="python">while</code> permettent de
+    construire des boucles.
+  </p>
+  <pre><code class="python hljs">
+for a in (1, 2, 3):
+    print(a)
+
+while a > 0:
+    print(a)
+    a = a - 1
+  </code></pre>
+</section><section>
+  <h3>Listes et n-uplets</h3>
+  <p>
+    Python propose deux types principaux pour les séquences d’éléments : les
+    listes (<code class="python">list</code>) et les n-uplets (<code class="python">tuple</code>).
+  </p>
+  <pre><code class="python hljs">
+new_list = ['a', 'b', 2]
+new_tuple = ('a', 'b', 2)
+new_list.append(7)
+print(new_list[1])
+print(new_list)
+  </code></pre>
+  <p>
+    Les deux types sont très similaires. La principale différence est que les
+    listes sont modifiables, contrairement aux tuples.
+  </p>
+</section><section>
+  <h3>Dictionnaires</h3>
+  <p>
+    Les dictionnaires (<code class="python">dict</code>) permettent d’associer des valeurs à
+    des clés.
+  </p>
+  <pre><code class="python hljs">
+fruit_color = {'banana': 'yellow', 'kiwi': 'green'}
+fruit_color['mango'] = 'orange'
+print(fruit_color['mango'])
+print(fruit_color)
+  </code></pre>
+  <p>
+    Les dictionnaires sont les objets les plus utilisés dans le fonctionnement
+    interne de Python. Ils sont très compacts et très rapides.
+  </p>
+  <p>
+    Les clés des dictionnaires sont ordonnées.
+  </p>
+</section><section>
+  <h3>Itérables</h3>
+  <p>
+    Les chaînes, séquences, dictionnaires (et bien d’autres) sont itérables,
+    c’est à dire que l’on peut faire une série d’opérations communes :
+  </p>
+  <pre><code class="python hljs">
+iterable = 'Rocket'
+
+for i in iterable:
+    print(i)
+
+print(iterable[3])
+print(iterable[0:3])
+print(iterable[3:0:-1])
+
+print(iterable + ' League')
+print(f'{iterable} League')
+  </code></pre>
+</section><section>
+  <h3>Muables</h3>
+  <p>
+    Certains objets en Python sont muables
+    (<code class="python">dict</code>, <code class="python">list</code>…), d’autres sont immuables
+    (<code class="python">str</code>, <code class="python">int</code>, <code class="python">tuple</code>…).
+  </p>
+  <p>
+    Les objets muables peuvent être modifiés grâce à des méthodes qui leur sont
+    propres (par exemple <code class="python">append</code>). Ces méthodes modifient l’objet
+    « en place » et ne revoient généralement rien (<code class="python">None</code>).
+  </p>
+  <p>
+    Les objets immuables ne peuvent jamais être modifiés. Ils possèdent
+    cependant des méthodes et des opérateurs (par exemple <code class="python">+</code>) qui
+    permettent de créer de nouveaux objets en se basant sur ces anciens objets.
+  </p>
+</section><section>
+  <h3>Fonctions (1)</h3>
+  <pre><code class="python hljs">
+def double(number):
+    """Return given number multiplied by two."""
+    return number * 2
+
+print(double(21))
+  </code></pre>
+</section><section>
+  <h3>Fonctions (2)</h3>
+  <pre><code class="python hljs">
+def fly(animal='ducks'):
+    """Print that an animal can fly."""
+    print(f'{animal} can fly')
+
+fly('bees')
+fly()
+fly('I believe I')
+  </code></pre>
+</section><section>
+  <h3>Fonctions (3)</h3>
+  <pre><code class="python hljs">
+def print_numbers(*numbers):
+    for number in numbers:
+        print(number)
+
+print_numbers(1, 3, 3, 7)
+  </code></pre>
+</section><section>
+  <h3>Fonctions (4)</h3>
+  <pre><code class="python hljs">
+def print_goals(**goals):
+    for name, minute in goals.items():
+        print(f'{name}: {minute}')
+
+print_goals(lucas=14, karl=74, houssem=92)
+  </code></pre>
+</section><section>
+  <h3>Lecture et écriture de fichiers</h3>
+  <pre><code class="python hljs">
+with open('/tmp/test', 'w') as fd:
+    fd.write('hello')
+
+with open('/tmp/test') as fd:
+    print(fd.read())
+  </code></pre>
+  <p>
+    La fermeture du fichier est automatiquement gérée par le contexte créé
+    par <code class="python">with</code>.
+  </p>
+</section><section>
+  <h3>Exceptions</h3>
+  <pre><code class="python hljs">
+try:
+    print('Division')
+    1 / 0
+except ZeroDivisionError as error:
+    print(error)
+else:
+    print('OK!')
+finally:
+    print('finally')
+  </code></pre>
+  <p>
+    Les exceptions qui ne sont pas traitées sont remontées à la fonction
+    appelante. Si l’exception n’est jamais traitée, le programme s’arrête.
+  </p>
+</section><section>
+  <h2>Bibliothèque standard</h2>
+</section><section>
+  <h3>Informations sur l’OS et appels système</h3>
+  <p><code class="python">os</code>, <code class="python">sys</code></p>
+</section><section>
+  <h3>Expressions régulières</h3>
+  <p><code class="python">re</code></p>
+</section><section>
+  <h3>Mathématiques</h3>
+  <p><code class="python">math</code></p>
+</section><section>
+  <h3>Réseau</h3>
+  <p><code class="python">http</code>, <code class="python">urllib</code>, <code class="python">smtplib</code>, <code class="python">socket</code>, <code class="python">ssl</code>…</p>
+</section><section>
+  <h3>Dates et temps</h3>
+  <p><code class="python">datetime</code></p>
+</section><section>
+  <h3>Journalisation</h3>
+  <p><code class="python">logging</code></p>
+</section><section>
+  <h3>Collections</h3>
+  <p><code class="python">collections</code></p>
+</section><section>
+  <h3>Chemins</h3>
+  <p><code class="python">pathlib</code></p>
+</section><section>
+  <h2>Environnements virtuels</h2>
+</section><section>
+  <h3>Le problème de l’installation globale</h3>
+  <p>On veut pouvoir installer des programmes utilisant des versions précises de Python et des modules externes.</p>
+  <p>Par défaut, l’installation de ces modules se fait au niveau du système. Python permet également à chaque personne d’installer des modules uniquement pour elle.</p>
+</section><section>
+  <h3>Les environnements virtuels</h3>
+  <p>Les environnements virtuels permettent de créer des sous-systèmes indépendants, avec leur interpréteur et leurs modules accessibles uniquement depuis l’environnement.</p>
+</section><section>
+  <h3>Le module <code>venv</code></h3>
+  <p>Python propose le module <code>venv</code> pour créer des environnements virtuels. Ce module est dans la bibliothèque standard.</p>
+  <p>Il existe également de nombreux outils externes permettant d’utiliser les environnements virtuels, comme <code>Pipenv</code> ou <code>Poetry</code>.</p>
+</section><section>
+  <h3>Création, activation, désactivation</h3>
+  <pre><code class="shell hljs ruby">
+$ cd /path/to/my/project
+$ python -m venv virtualenv  # Création
+$ . virtualenv/bin/activate  # Activation
+(virtualenv) $ which python  # Python de l’environnement
+/path/to/my/project/virtualenv/bin/python
+(virtualenv) $ pip install X # Installation d’un module
+…
+(virtualenv) $ deactivate    # Désactivation
+$ which python               # Python du système
+/usr/bin/python
+  </code></pre>
+</section><section>
+  <h3>Informations à savoir</h3>
+  <ul>
+    <li>Toutes les informations concernant l’environnement virtuel sont dans le dossier.</li>
+    <li>Les modules installés dans l’environnement ne sont pas accessibles de l’extérieur.</li>
+    <li>Les environnements virtuels sont dépendants du système. On ne les versionne pas.</li>
+  </ul>
+</section><section>
+  <h2>Classes</h2>
+</section><section>
+  <h3>Définition de classes</h3>
+  <pre><code class="python hljs">
+class Animal:
+    """Representation of an animal."""
+    def __init__(self, name):
+        self.name = name
+
+    def say_hello(self):
+       """Print a little presentation of the animal."""
+        print(f'Hello! My name is {self.name}.')
+
+tweety = Animal('Tweety')
+tweety.say_hello()
+  </code></pre>
+</section><section>
+  <h3>Méthodes</h3>
+  <p>
+    Les méthodes sont définies de la même manière que les fonctions, mais dans
+    le bloc de la classe.
+  </p>
+  <p>
+    Le premier paramètre est habituellement nommé <code class="python">self</code> et
+    correspond à l’instance de la classe.
+  </p>
+  <p>
+    Certaines méthodes sont dites « spéciales », comme par
+    exemple <code class="python">__init__</code> qui est appelée lors de l’instanciation de la
+    classe.
+  </p>
+</section><section>
+  <h3>Attributs</h3>
+  <p>
+    Les attributs de n’importe quel type peuvent être ajoutés sur les instances
+    à la création et durant toute la vie de l’objet.
+  </p>
+  <p>
+    Les attributs sont par défaut publics. Il est possible de créer des
+    attributs protégés, mais avant tout pour éviter les accidents.
+  </p>
+  <p>
+    Une instance peut également avoir des attributs spéciaux.
+  </p>
+</section><section>
+  <h3>Héritage</h3>
+  <pre><code class="python hljs">
+class Duck(Animal):
+    """Representation of a duck."""
+    def say_hello(self):
+        print(f"I'm a duck, my name is {self.name}.")
+
+daffy = Duck('Daffy')
+daffy.say_hello()
+  </code></pre>
+  <p>
+    Les méthodes redéfinies écrasent les méthodes de la classe dont on hérite.
+  </p>
+  <p>
+    Python inclut la possibilité de faire de l’héritage multiple.
+  </p>
+</section><section>
+  <h3>Appel de méthodes parentes</h3>
+  <pre><code class="python hljs">
+class Bunny(Animal):
+    """Representation of a bunny."""
+    def say_hello(self):
+        super().say_hello()
+        print("I'm a bunny.")
+
+bugs = Bunny('Bugs')
+bugs.say_hello()
+  </code></pre>
+  <p>
+    La fonction <code class="python">super</code> retourne un objet dont les méthodes sont
+    celles de la classe parente la plus proche possédant cette méthode.
+  </p>
+</section><section>
+  <h2>Pour aller plus loin</h2>
+</section><section>
+  <h3>Annotations</h3>
+  <p>
+    Python permet de donner des indications sur le type des arguments et de la
+    valeur de retour des fonctions. Ces annotations sont purement indicatives
+    avec l’interpréteur par défaut, mais peuvent être utilisées par des
+    programmes comme <a href="http://mypy-lang.org/">Mypy</a>.
+  </p>
+  <pre><code class="python hljs">
+class BankAccount:
+    def __init__(self, initial_balance: int = 0) -> None:
+        self.balance = initial_balance
+    def deposit(self, amount: int) -> None:
+        self.balance += amount
+    def withdraw(self, amount: int) -> None:
+        self.balance -= amount
+    def overdrawn(self) -> bool:
+        return self.balance < 0
+  </code></pre>
+</section><section>
+  <h3>Duck typing</h3>
+  <p>
+    Python est connu pour favoriser le <em>duck typing</em> 🦆, c’est-à-dire la
+    reconnaissance des objets par ses méthodes et ses attributs, sans se
+    soucier de son type.
+  </p>
+  <pre><code class="python hljs">
+class Duck:
+    def fly(self):
+        print("Duck flying")
+
+class Airplane:
+    def fly(self):
+        print("Airplane flying")
+
+for thing in Duck(), Airplane():
+    thing.fly()
+  </code></pre>
+</section><section>
+  <h3>Listes en compréhension</h3>
+  <p>
+    Python propose une syntaxe permettant de se passer des fonctions
+    <code class="python">map</code> et <code class="python">filter</code> communément utilisées dans d’autres
+    langages. Cette fonction sert pour les listes, les dictionnaires et les
+    ensembles. Elle permet également de créer des générateurs.
+  </p>
+  <pre><code class="python hljs">
+odd = [i for i in range(10) if i%2]
+double = {i: i*2 for i in range(10)}
+triple = {i*3 for i in range(10)}
+odd_lazy = (i for i in range(10**10) if i%2)
+  </code></pre>
+</section><section>
+  <h3>Gestion de la mémoire</h3>
+  <p>
+    Python base
+    sa <a href="https://realpython.com/python-memory-management/">gestion de mémoire</a>
+    sur un <a href="https://fr.wikipedia.org/wiki/Ramasse-miettes_(informatique)">ramasse-miettes</a>
+    à comptage de références.
+  </p>
+  <p>
+    Pour assurer une gestion correcte des ressources partager, un verrou global 🔒
+    existe au niveau de l’interpréteur (<em>Global Interpreter Lock</em>, GIL),
+    interdisant l’exécution en parallèle dans un même processus de certaines
+    opérations.
+  </p>
+  <p>
+    Le langage offre la possibilité de supprimer des références et de contrôler
+    le ramasse-miettes, sans risque de désallouer la mémoire encore utilisée
+    par l’application.
+  </p>
+</section><section>
+  <h3>Espaces de noms</h3>
+  <p>
+    Python crée des espaces de noms pour les modules, les fonctions, les
+    classes, les méthodes, et tous les objets en compréhension.
+  </p>
+  <p>
+    Dans un espace de noms, on peut accéder en lecture seule aux variables qui
+    sont définies dans l’espace de nom parent. On peut créer de nouvelles
+    variables, qui masqueront les variables potentiellement définies par le
+    parent.
+  </p>
+</section><section>
+  <h3>Bonnes pratiques</h3>
+  <p>
+    Python est un langage dont les conventions sont très largement
+    homogènes. Ne pas suivre ces conventions est considéré comme une grande
+    source de frustration et de rejet de la part de la communauté.
+  </p>
+  <p>
+    Lire du code récent (pas celui de la bibliothèque standard !) est la
+    meilleure manière de progresser.
+  </p>
+</section><section>
+  <h3>Autres implémentations</h3>
+  <p>
+    CPython est l’implémentation de référence, mais d’autres implémentations
+    plus ou moins compatibles existent.
+  </p>
+  <p>
+    Certaines implémentations proposent d’autres manières d’interpréter le
+    langage, généralement avec des stratégies plus récentes. La plus connue est
+    <a href="https://fr.wikipedia.org/wiki/PyPy">PyPy</a>, écrite dans un
+    sous-ensemble de Python, comprenant un compilateur <em>just-in-time</em>.
+  </p>
+  <p>
+    D’autres implémentations transpilent le code Python en d’autres langages
+    (Cython en C, Pythran en C++…) ou en bytecode (Jython pour la JVM,
+    IronPython pour .NET…).
+  </p>
+</section><section>
+  <h3>Usages</h3>
+  <p>
+    Il existe chaque
+    année <a href="https://www.jetbrains.com/lp/python-developers-survey-2020/">un
+    questionnaire</a> proposé aux développeurs Python, permettant d’en savoir
+    plus sur la communauté de développeurs.
+  </p>
+  <p>
+    Les principales utilisations de Python concernent actuellement le
+    traitement de données, le développement web, l’administration système et le
+    <em>machine learning</em>.
+  </p>
+</section><section>
+  <h3>Python Enhancement Proposals</h3>
+  <p>
+    Les commentaires et propositions d’améliorations sont centraliséses dans
+    des documents communément appelés « PEP ».
+  </p>
+  <p>
+    Certaines sont très largement suivies, comme les
+    <a href="https://www.python.org/dev/peps/pep-0008/">PEP 8</a> (guide de style),
+    <a href="https://www.python.org/dev/peps/pep-0020/">PEP 20</a> (zen de Python) et
+    <a href="https://www.python.org/dev/peps/pep-0257/">PEP 257</a> (conventions sur la documentation).
+  </p>
+</section><section>
+  <h3>Bibliothèques</h3>
+  <p>
+    Certaines bibliothèques sont très largement utilisées, et quelques unes
+    sont même considérées comme des standards.
+  </p>
+  <p>
+    Concernant le web, Flask et Django sont les <em>frameworks</em> les plus
+    utilisés. Côté client, on utilise Requests pour effectuer des requêtes HTTP.
+  </p>
+  <p>
+    Dans le monde scientifique, des outils sont extrêmement répandus, parmi
+    lesquels NumPy, SciPy, Pandas, Matplotlib, SciKit-Learn et TensorFlow.
+  </p>
+  <p>
+    Enfin, les bibliothèques utilisées pour le <em>packaging</em> sont très
+    largement utilisées : Pip, Setuptools, Wheel et Pipenv sont parmi les
+    modules externes les plus téléchargés sur PyPI. D’autres outils comme
+    SQLAlchemy, Pytest et Pillow sont également très utilisés.
+  </p>
+</section><section>
+  <h3>Utilisations</h3>
+  <p>
+    Python est actuellement
+    <a href="https://insights.stackoverflow.com/trends?tags=java%2Cc%2Cc%2B%2B%2Cpython%2Cc%23%2Cvb.net%2Cjavascript%2Cassembly%2Cphp%2Cperl%2Cruby%2Cvb%2Cswift%2Cr%2Cobjective-c">le
+    langage dont on discute le plus sur StackOverflow</a>.
+  </p>
+  <p>
+    Certains sites, outils et jeux majeurs utilisent massivement Python, pour
+    tout ou partie de leur code. On notera en particulier Netflix, Reddit,
+    YouTube, Dropbox, World of Tanks…
+  </p>
+</section><section>
+  <h3>Gouvernance</h3>
+  <p>
+    Python a longtemps été géré par son créateur Guido van Rossum, qui s’est
+    lui-même désigné <em>benevolent dictator for life</em>. Le BDFL avait pour
+    principale mission de valider ou de refuser les PEP préalablement soumises
+    au vote.
+  </p>
+  <p>
+    À la suite de la PEP 572, Guido van Rossum a annoncé le 12 juillet 2018
+    vouloir renoncer à ce rôle. Il a annoncé qu’il ne nommerait pas de
+    successeur et que la communauté devait décider du fonctionnement futur.
+  </p>
+  <p>
+    Des PEP ont été soumises au vote pour désigner le nouveau mode de
+    gouvernance. En décembre 2018 a été annoncé un conseil de 5 personnes
+    chargées de reprendre dans les grandes lignes les missions du BDFL, en
+    particulier l’acceptation de PEP.
+  </p>
+</section><section>
+  <h3>Communauté</h3>
+  <p>
+    Python est soutenu par la Python Software Foundation, qui a pour mission
+    d’accompagner les projets <em>open source</em> utilisant le langage.
+  </p>
+  <p>
+    La communauté Python est connue pour être particulièrement bienveillante et
+    ouverte. Un <a href="https://www.python.org/psf/codeofconduct/">code de
+    conduite</a> a été mis en place en 2013 pour affirmer publiquement les
+    valeurs de ses membres.
+  </p>
+  <p>
+    Dans le monde francophone 🇫🇷, <a href="https://afpy.org/">l’Association
+    Francophone Python</a> organise régulièrement des rencontres entre
+    utilisateurs de tous niveaux. Une conférence annuelle, PyConFr, se tient
+    chaque année dans une ville différente.
+  </p>
+</section><section>
+  <h3>Liens utiles</h3>
+  <ul>
+    <li><a href="https://realpython.com/">Real Python</a> : tutoriels et formations</li>
+    <li><a href="https://pyvideo.org/">PyVideo</a> : vidéos autour du langage</li>
+    <li><a href="https://talkpython.fm/home">Talk Python to Me</a> et <a href="https://pythonbytes.fm/">PythonBytes</a> : podcasts</li>
+    <li><a href="https://docs.python-guide.org/">The Hitchhiker’s Guide to Python</a></li>
+  </ul>
+</section>

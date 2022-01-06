@@ -1,0 +1,99 @@
+<section>
+  <h1>MySQL</h1>
+  <p><a href="https://yabz.fr/">Guillaume Ayoub</a> − 2020/2021</p>
+</section><section>
+  <ol>
+    <li>Présentation</li>
+    <li>Utilisations</li>
+    <li>Fonctionnalités</li>
+    <li>Pour aller plus loin</li>
+  </ol>
+</section><section>
+  <h2>Présentation</h2>
+</section><section>
+  <h3>SGBDR</h3>
+  <p>MySQL est un système de gestion de bases de données relationnelles.</p>
+  <p>Le nom MySQL vient de la fille de Michael Widenius, My.</p>
+</section><section>
+  <h3>Historique</h3>
+  <p>MySQL a été créé en 1995 par David Axmark, Allan Larsson et Michael Widenius, au sein de la société suédoise MySQL AB.</p>
+  <p>L’entreprise a été rachetée pour 1 milliard de dollars par Sun Microsystems en 2008, elle-même rachetée par Oracle en 2010.</p>
+</section><section>
+  <h3>MariaDB</h3>
+  <p>Suite au rachat de Sun Microsystems par Oracle, Michael Widenius a forké le projet et créé MariaDB.</p>
+</section><section>
+  <h3>Licence</h3>
+  <p>MySQL est un logiciel libre distribué sous licence GPLv2.</p>
+  <p>Il est également vendu sous licence propriétaire par Oracle.</p>
+</section><section>
+  <h3>Code</h3>
+  <p>MySQL est écrit majoritairement en C et C++.</p>
+  <p>Le serveur fonctionne sur une grande liste de plateformes (Linux, macOS, Windows, BSD, Solaris, AIX, HP-UX…).</p>
+</section><section>
+  <h2>Utilisations</h2>
+</section><section>
+  <h3>Popularité</h3>
+  <p>MySQL est l’un des gestionnaires de bases de données les plus utilisés dans le monde.</p>
+  <p>MySQL est la base de données de référence pour beaucoup de frameworks web (WordPress, Drupal, Joomla…). Elle est largement utilisée par les plus grands acteurs du web (Facebook, Wikipedia, Airbnb, Booking, YouTube, Spotify, Netflix…).</p>
+</section><section>
+  <h3>Simplicité</h3>
+  <p>La grande popularité de MySQL réside avant tout dans sa simplicité d’utilisation, dans l’abondance de sa documentation et dans ses performances à grande échelle.</p>
+  <p>MySQL est l’une des composantes de l’architecture historique LAMP (Linux, Apache, MySQL, PHP), démocratisée dans les années 2000 pour l’installation de serveurs web.</p>
+</section><section>
+  <h3>Interfaces</h3>
+  <p>Un grand nombre d’interfaces pour administrer et utiliser les bases de données ont été développées pour MySQL :</p>
+  <p>
+    </p><ul>
+      <li>une interface en ligne de commande (mysql),</li>
+      <li>des clients lourds (MySQL Workbench, DBeaver, LibreOffice Base…),</li>
+      <li>des clients web (phpMyAdmin…),</li>
+      <li>des connecteurs pour un grand nombre de langages de programmation (Java, Python, JavaScript, PHP…).</li>
+    </ul>
+  <p></p>
+</section><section>
+  <h2>Fonctionnalités</h2>
+</section><section>
+  <h3>SQL</h3>
+  <p>MySQL offre un large support du langage SQL, bien qu’elle n’en suive pas strictement la syntaxe.</p>
+  <p>De nombreuses extensions au langage ont également été apportées.</p>
+</section><section>
+  <h3>Moteurs</h3>
+  <p>MySQL supporte différents moteurs de bases de données. Les deux principaux sont MyISAM et InnoDB.</p>
+</section><section>
+  <h3>MyISAM</h3>
+  <p>MyISAM est le moteur historique de MySQL, et en était le moteur par défaut jusqu’en 2010.</p>
+  <p>Il est particulièrement performant pour l’accès aux données en lecture seule.</p>
+  <p>Il ne supporte pas les transactions, ni la vérification des contraintes de clés étrangères.</p>
+</section><section>
+  <h3>InnoDB</h3>
+  <p>Le moteur InnoDB a été créé pour pallier les limitations de MyISAM. Il est aujourd’hui installé par défaut dans la plupart des versions de MySQL proposées par Oracle.</p>
+  <p>Il supporte les transactions (au sens ACID du terme) et les contraintes de clés étrangères.</p>
+</section><section>
+  <h3>Performances</h3>
+  <p>MySQL est reconnu pour offrir un très haut niveau de performances. En faisant le choix de prendre certaines libertés avec la norme SQL, elle a pu s’affranchir de certaines contraintes et privilégier la rapidité d’exécution.</p>
+</section><section>
+  <h3>Scalabilité</h3>
+  <p>MySQL est très largement utilisée par des acteurs gérant d’immenses quantités de données.</p>
+  <p>La base de données propose des outils permettant d’assurer le stockage de volumes importants sur des architectures distribuées.</p>
+</section><section>
+  <h2>Pour aller plus loin</h2>
+</section><section>
+  <h3>Complémentarité</h3>
+  <p>MySQL apporte des avantages différents de ceux des autres SGBDR libres, en particulier PostgreSQL et SQLite. Cette complémentarité donne à l’ensemble de ces solutions une immense adoption par les utilisateurs, et une satisfaction globale relativement élevée.</p>
+</section><section>
+  <h3>Oracle</h3>
+  <p>Le rachat de Sun par Oracle a créé un grand émoi dans la communauté qui développe MySQL. La création de MariaDB, qui a emporté avec elle une partie importante des développeurs, montre la méfiance d’une partie des utilisateurs vis-à-vis de l’entreprise américaine reconnue sur le marché des bases de données.</p>
+</section><section>
+  <h3>NoSQL</h3>
+  <p>Les bases de données non relationnelles existent depuis longtemps, mais une vague de nouveaux outils a émergé au début de ce siècle (REDIS, CouchDB, MongoDB, ElasticSearch…)</p>
+  <p>Ces bases de données NoSQL proposent de nombreux avantages : stockage sans schéma, stockage clé-valeur, vitesse, distribution… Il faut cependant noter qu’en perdant la rigidité du côté relationnel, elles en perdent souvent les avantages, et en particulier la cohérence des données.</p>
+</section><section>
+  <h3>Liens utiles</h3>
+  <ul>
+    <li>Tutoriel MySQL : <a href="https://www.mysqltutorial.org/">MySQL Tutorial</a></li>
+    <li>Classement des SGBD : <a href="https://db-engines.com/en/ranking">DB-Engines</a></li>
+    <li>Documentation : <a href="https://dev.mysql.com/doc/">MySQL Documentation</a></li>
+    <li>Comparaison des SGBDR libres : <a href="https://www.digitalocean.com/community/tutorials/sqlite-vs-mysql-vs-postgresql-a-comparison-of-relational-database-management-systems">DigitalOcean</a></li>
+    <li>Histoire de MySQL : <a href="https://www.oreilly.com/library/view/understanding-mysql-internals/0596009577/ch01.html">Understanding MySQL Internals, O’Reilly</a></li>
+  </ul>
+</section>
