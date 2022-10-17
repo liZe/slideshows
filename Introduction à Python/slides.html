@@ -1,6 +1,6 @@
 <section>
   <h1>Introduction à Python</h1>
-  <p><a href="https://yabz.fr/">Guillaume Ayoub</a> − 2021/2022</p>
+  <p><a href="https://yabz.fr/">Guillaume Ayoub</a> − 2022/2023</p>
 </section><section>
   <ol>
     <li>Présentation</li>
@@ -13,7 +13,9 @@
 </section><section>
   <h2>Présentation</h2>
 </section><section>
-  <code class="python"><a href="https://xkcd.com/353/">import antigravity</a></code>
+  <a href="https://numpy.org/case-studies/blackhole-image/">
+    <img src="static/black_hole.jpg" style="max-height: 70vh" title="Katie Bouman" />
+  </a>
 </section><section>
   <h3>Histoire</h3>
   <p>Python a été créé à la fin des années 80 par <a href="https://fr.wikipedia.org/wiki/Guido_van_Rossum">Guido van Rossum</a>.</p>
@@ -42,21 +44,19 @@ for i in numbers:
   <ul>
     <li>Lent</li>
     <li>Complexe à packager</li>
-    <li>Difficile à embarquer</li>
     <li>Limité pour le <em><a href="https://fr.wikipedia.org/wiki/Multithreading">multithreading</a></em></li>
   </ul>
 </section><section>
   <h3>Bibliothèque standard</h3>
   <p>
-    Python est fourni « piles incluses » 🔋, c’est-à-dire avec une bibliothèque
+    Python est fourni « piles incluses » 🔋, c’est-à-dire avec une bibliothèque
     standard très fournie qui apporte de nombreuses fonctionnalités sans avoir
     besoin de modules externes.
   </p>
   <p>
     Python intègre de nombreux outils dont les fonctions mathématiques
-    avancées, des clients et protocoles réseaux les plus répandus, les
-    expressions régulières, les dates, la lecture et l’écriture de fichiers, la
-    parallélisation…
+    avancées 📐, des clients et protocoles réseaux les plus répandus 📶, les
+    dates 📅, la lecture et l’écriture de fichiers 📁…
   </p>
 </section><section>
   <h2>Interpréteur & concepts de base</h2>
@@ -70,7 +70,7 @@ for i in numbers:
     L’implémentation de référence de Python
     (<a href="https://fr.wikipedia.org/wiki/CPython">CPython</a>) transforme à
     la volée le code source en code binaire
-    (stocké dans un dossier <code class="python">.pyc</code>) qui
+    (stocké dans un fichier <code class="python">.pyc</code>) qui
     est transmis à une
     <a href="https://fr.wikipedia.org/wiki/Machine_virtuelle#Machine_virtuelle_de_haut_niveau">machine virtuelle</a>.
   </p>
@@ -106,15 +106,14 @@ a = 1 + 2  # Ceci est aussi un commentaire
   <h3>Nombres</h3>
   <p>
     Python propose comme types de base les nombres à virgule flottante
-    (<code class="python">float</code>), les entiers (<code class="python">int</code>) et les complexes
-    (<code class="python">complex</code>). Leur précision est automatiquement adaptée selon leur taille.
+    (<code class="python">float</code>) et les entiers (<code class="python">int</code>).
+    Leur précision est automatiquement adaptée selon leur taille.
   </p>
   <pre><code class="python hljs">
 a = 12
 b = 123_456_789
 c = 1.2345
-d = 3 + 2j
-e = 10 ** 100000
+d = 10 ** 100000
   </code></pre>
   <p>
     Les opérations de base utilisent les opérateurs classiques
@@ -182,7 +181,7 @@ while a > 0:
 </section><section>
   <h3>Listes et n-uplets</h3>
   <p>
-    Python propose deux types principaux pour les séquences d’éléments : les
+    Python propose deux types principaux pour les tableaux d’éléments : les
     listes (<code class="python">list</code>) et les n-uplets (<code class="python">tuple</code>).
   </p>
   <pre><code class="python hljs">
@@ -216,23 +215,33 @@ print(fruit_color)
     Les clés des dictionnaires sont ordonnées.
   </p>
 </section><section>
+  <h3>Séquences</h3>
+  <p>
+    Les chaînes, n-uplets et listes sont des séquences. Elles offrent une série
+    d’opérations communes :
+  </p>
+  <pre><code class="python hljs">
+sequence = 'Rocket'
+
+print(sequence[3])
+print(sequence[0:3])
+print(sequence[3:0:-1])
+
+print(2 * sequence)
+print(sequence + ' League')
+  </code></pre>
+</section><section>
   <h3>Itérables</h3>
   <p>
-    Les chaînes, séquences, dictionnaires (et bien d’autres) sont itérables,
-    c’est à dire que l’on peut faire une série d’opérations communes :
+    Avec d’autres objets dont les dictionnaires (et bien d’autres), les
+    séquences sont dites itérables, c’est à dire que l’on peut récupérer leurs
+    membres les uns après les autres :
   </p>
   <pre><code class="python hljs">
 iterable = 'Rocket'
 
 for i in iterable:
     print(i)
-
-print(iterable[3])
-print(iterable[0:3])
-print(iterable[3:0:-1])
-
-print(iterable + ' League')
-print(f'{iterable} League')
   </code></pre>
 </section><section>
   <h3>Muables</h3>
@@ -252,7 +261,7 @@ print(f'{iterable} League')
     permettent de créer de nouveaux objets en se basant sur ces anciens objets.
   </p>
 </section><section>
-  <h3>Fonctions (1)</h3>
+  <h3>Fonctions</h3>
   <pre><code class="python hljs">
 def double(number):
     """Return given number multiplied by two."""
@@ -261,7 +270,7 @@ def double(number):
 print(double(21))
   </code></pre>
 </section><section>
-  <h3>Fonctions (2)</h3>
+  <h3>Valeurs par défaut</h3>
   <pre><code class="python hljs">
 def fly(animal='ducks'):
     """Print that an animal can fly."""
@@ -269,39 +278,15 @@ def fly(animal='ducks'):
 
 fly('bees')
 fly()
-fly('I believe I')
-  </code></pre>
-</section><section>
-  <h3>Fonctions (3)</h3>
-  <pre><code class="python hljs">
-def print_numbers(*numbers):
-    for number in numbers:
-        print(number)
-
-print_numbers(1, 3, 3, 7)
-  </code></pre>
-</section><section>
-  <h3>Fonctions (4)</h3>
-  <pre><code class="python hljs">
-def print_goals(**goals):
-    for name, minute in goals.items():
-        print(f'{name}: {minute}')
-
-print_goals(lucas=14, karl=74, houssem=92)
   </code></pre>
 </section><section>
   <h3>Lecture et écriture de fichiers</h3>
   <pre><code class="python hljs">
-with open('/tmp/test', 'w') as fd:
-    fd.write('hello')
+from pathlib import Path
 
-with open('/tmp/test') as fd:
-    print(fd.read())
+Path('/tmp/test').write_text('hello')
+print(Path('/tmp/test').read_text())
   </code></pre>
-  <p>
-    La fermeture du fichier est automatiquement gérée par le contexte créé
-    par <code class="python">with</code>.
-  </p>
 </section><section>
   <h3>Exceptions</h3>
   <pre><code class="python hljs">
@@ -356,22 +341,8 @@ finally:
   <p>Les environnements virtuels permettent de créer des sous-systèmes indépendants, avec leur interpréteur et leurs modules accessibles uniquement depuis l’environnement.</p>
 </section><section>
   <h3>Le module <code>venv</code></h3>
-  <p>Python propose le module <code>venv</code> pour créer des environnements virtuels. Ce module est dans la bibliothèque standard.</p>
-  <p>Il existe également de nombreux outils externes permettant d’utiliser les environnements virtuels, comme <code>Pipenv</code> ou <code>Poetry</code>.</p>
-</section><section>
-  <h3>Création, activation, désactivation</h3>
-  <pre><code class="shell hljs ruby">
-$ cd /path/to/my/project
-$ python -m venv virtualenv  # Création
-$ . virtualenv/bin/activate  # Activation
-(virtualenv) $ which python  # Python de l’environnement
-/path/to/my/project/virtualenv/bin/python
-(virtualenv) $ pip install X # Installation d’un module
-…
-(virtualenv) $ deactivate    # Désactivation
-$ which python               # Python du système
-/usr/bin/python
-  </code></pre>
+  <p>Python propose le module <a href="https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#creating-a-virtual-environment"><code>venv</code></a> pour créer des environnements virtuels. Ce module est dans la bibliothèque standard.</p>
+  <p>Il existe également de nombreux outils externes permettant d’utiliser les environnements virtuels, comme <a href="https://pipenv.pypa.io/en/latest/">Pipenv</a> ou <a href="https://python-poetry.org/">Poetry</a>.</p>
 </section><section>
   <h3>Informations à savoir</h3>
   <ul>
@@ -481,7 +452,7 @@ class BankAccount:
 </section><section>
   <h3>Duck typing</h3>
   <p>
-    Python est connu pour favoriser le <em>duck typing</em> 🦆, c’est-à-dire la
+    Python est connu pour favoriser le <em>duck typing</em> 🦆, c’est-à-dire la
     reconnaissance des objets par ses méthodes et ses attributs, sans se
     soucier de son type.
   </p>
@@ -520,7 +491,7 @@ odd_lazy = (i for i in range(10**10) if i%2)
     à comptage de références.
   </p>
   <p>
-    Pour assurer une gestion correcte des ressources partager, un verrou global 🔒
+    Pour assurer une gestion correcte des ressources partager, un verrou global 🔒
     existe au niveau de l’interpréteur (<em>Global Interpreter Lock</em>, GIL),
     interdisant l’exécution en parallèle dans un même processus de certaines
     opérations.
@@ -547,7 +518,7 @@ odd_lazy = (i for i in range(10**10) if i%2)
   <p>
     Python est un langage dont les conventions sont très largement
     homogènes. Ne pas suivre ces conventions est considéré comme une grande
-    source de frustration et de rejet de la part de la communauté.
+    source de frustration et de rejet de la part de la communauté 😠.
   </p>
   <p>
     Lire du code récent (pas celui de la bibliothèque standard !) est la
@@ -574,7 +545,7 @@ odd_lazy = (i for i in range(10**10) if i%2)
   <h3>Usages</h3>
   <p>
     Il existe chaque
-    année <a href="https://www.jetbrains.com/lp/python-developers-survey-2020/">un
+    année <a href="https://lp.jetbrains.com/python-developers-survey-2021/">un
     questionnaire</a> proposé aux développeurs Python, permettant d’en savoir
     plus sur la communauté de développeurs.
   </p>
@@ -591,9 +562,9 @@ odd_lazy = (i for i in range(10**10) if i%2)
   </p>
   <p>
     Certaines sont très largement suivies, comme les
-    <a href="https://www.python.org/dev/peps/pep-0008/">PEP 8</a> (guide de style),
-    <a href="https://www.python.org/dev/peps/pep-0020/">PEP 20</a> (zen de Python) et
-    <a href="https://www.python.org/dev/peps/pep-0257/">PEP 257</a> (conventions sur la documentation).
+    <a href="https://www.python.org/dev/peps/pep-0008/">PEP 8</a> (guide de style),
+    <a href="https://www.python.org/dev/peps/pep-0020/">PEP 20</a> (zen de Python) et
+    <a href="https://www.python.org/dev/peps/pep-0257/">PEP 257</a> (conventions sur la documentation).
   </p>
 </section><section>
   <h3>Bibliothèques</h3>
@@ -623,9 +594,9 @@ odd_lazy = (i for i in range(10**10) if i%2)
     langage dont on discute le plus sur StackOverflow</a>.
   </p>
   <p>
-    Certains sites, outils et jeux majeurs utilisent massivement Python, pour
-    tout ou partie de leur code. On notera en particulier Netflix, Reddit,
-    YouTube, Dropbox, World of Tanks…
+    Certains sites et outils majeurs utilisent massivement Python pour tout ou
+    partie de leur code. On notera en particulier Netflix, Instagram, Reddit,
+    YouTube, Dropbox…
   </p>
 </section><section>
   <h3>Gouvernance</h3>
@@ -659,9 +630,11 @@ odd_lazy = (i for i in range(10**10) if i%2)
     valeurs de ses membres.
   </p>
   <p>
-    Dans le monde francophone 🇫🇷, <a href="https://afpy.org/">l’Association
+    Dans le monde francophone 🇫🇷, <a href="https://afpy.org/">l’Association
     Francophone Python</a> organise régulièrement des rencontres entre
-    utilisateurs de tous niveaux. Une conférence annuelle, PyConFr, se tient
+    utilisateurs de tous niveaux
+    (<a href="https://www.meetup.com/fr-FR/Python-AFPY-Lyon/">dont certaines à Lyon</a>).
+    Une conférence gratuite, <a href="https://www.pycon.fr/">PyConFr</a>, se tient
     chaque année dans une ville différente.
   </p>
 </section><section>
