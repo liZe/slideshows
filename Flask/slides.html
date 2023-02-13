@@ -1,0 +1,234 @@
+<section>
+  <h1>Flask</h1>
+  <p><a href="https://yabz.fr/">Guillaume Ayoub</a> − 2022/2023</p>
+</section><section>
+  <ol>
+    <li>Premiers pas</li>
+    <li><em>Templates</em></li>
+    <li>Requêtes, méthodes, formulaires, réponses</li>
+    <li>Pour aller plus loin</li>
+  </ol>
+</section><section>
+  <h2>Premiers pas</h2>
+</section><section>
+  <h3>Une application <a href="https://flask.palletsprojects.com/">Flask</a> minimale</h3>
+  <pre><code class="python">
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello_world():
+    return "&lt;p>Hello, World!&lt;/p>"
+  </code></pre>
+</section><section>
+  <h3>Quelques explications</h3>
+  <ul>
+    <li><code>app</code> est une application Flask, elle se comporte comme une application <a href="https://wsgi.readthedocs.io/en/latest/">WSGI</a> et peut être utilisée par un serveur compatible.</li>
+    <li>La fonction <code>hello_world</code> est appelée une « vue ». Elle renvoie une chaîne de caractères qui sera le contenu de la réponse. Cette réponse a par défaut un statut 200 et un type HTML encodé en UTF-8.</li>
+    <li>La ligne qui précède la fonction <code>hello_world</code> est un <a href="https://peps.python.org/pep-0318/">décorateur</a> Python. Ce décorateur sert à indiquer l’URL pour laquelle cette vue doit être appelée.</li>
+  </ul>
+</section><section>
+  <h3>On installe Flask et on lance le serveur</h3>
+  <pre><code>
+$ python3 -m venv env1
+$ source env1/bin/activate
+(env1) $ pip install flask
+(env1) $ nano app.py
+(env1) $ flask run
+  * Running on http://127.0.0.1:5000
+  </code></pre>
+</section><section>
+  <h3>Comment ça marche ?</h3>
+  <ul>
+    <li>Flask utilise un petit seveur HTTP écrit en Python, <a href="https://palletsprojects.com/p/werkzeug/">Werkzeug</a>.</li>
+    <li>La commande <code>run</code> lance l’application, que Flask cherche par défaut dans <code>app.py</code>.</li>
+  </ul>
+</section><section>
+  <h3>Et on peut faire quoi ?</h3>
+  <ul>
+    <li>On peut choisir quelques options, comme le port sur lequel on écoute ou le nom de l’application à lancer.</li>
+    <li>On peut activer un <em>reloader</em> et un <em>debugger</em> avec l’option <code>--debug</code>.</li>
+    <li>On peut lancer <code>flask --help</code> et <code>flask run --help</code> pour découvrir <a href="https://flask.palletsprojects.com/en/2.2.x/cli/">tout ce que l’on peut faire avec l’interface en ligne de commande</a>.</li>
+  </ul>
+</section><section>
+  <h3>Routes</h3>
+  <ul>
+    <li>En développement web, on apelle « route » une URL ou un ensemble d’URL conduisant à l’exécution d’une fonction donnée.</li>
+    <li>Avec Flask, les routes sont déclarées via le décorateur <code>app.route</code>. Elles peuvent être paramétrées, auquel cas le paramètre sera passé à la fonction vue.</li>
+    <li>On peut avoir plusieurs paramètres (<code>/hello/&lt;firstname>/&lt;lastname>/</code>), et les paramètres peuvent être typés (<code>/hello/&lt;str:name>/</code>).</li>
+  </ul>
+  <pre style="margin-top: 1em"><code class="python">
+@app.route("/hello/&lt;name>")
+def hello_name(name):
+    return f"&lt;p>Hello, {name}!&lt;/p>"
+  </code></pre>
+</section><section>
+  <h3>Génération d’URL</h3>
+  <p>Les routes permettent à Flask de trouver la vue correspondant à une URL, mais également de faire l’inverse, à savoir de reconstruire une URL pour une vue donnée. On utilise pour cela la fonction <code>url_for</code>, qui prend en paramètres le nom de la vue et les éventuels paramètres de la vue.</p>
+  <pre><code class="python">
+@app.route("/about/")
+def about():
+    john_url = url_for("hello_name", name="John")
+    return f"&lt;a href="{john_url}">Say hello to John&lt;/a>"
+  </code></pre>
+  <p>La fonction <code>url_for</code> rend le code plus facile à maintenir, puisqu’elle permet de changer l’URL d’une vue sans changer tous les liens qui pointent vers elle.</p>
+</section><section>
+  <h3>Ressources statiques</h3>
+  <p>Une application web ne se limite pas aux contenus HTML générés par les vues ; on a également besoin de ressources statiques (CSS, JavaScript, images…). Avec Flask, il est possible de stocker des fichiers dans un répertoire <code>static</code>, situé dans le même répertoire que le fichier Python définissant l’application.</p>
+  <p>L’URL de ces fichiers est donnée par la fonction <code>url_for</code> :</p>
+  <pre><code class="python">
+url_for("static", filename="style.css")
+  </code></pre>
+</section><section>
+  <h2><em>Templates</em></h2>
+</section><section>
+  <h3>Qu’est-ce qu’un <em>template</em> ?</h3>
+  <p>Un <em>template</em> (en français « modèle », « patron », « gabarit »…) est un fichier texte dont certaines parties sont remplacées à l’exécution.</p>
+  <p>Il permet d’intégrer facilement le contenu de certaines variables et propose quelques structures de contrôle (conditions, boucles…).</p>
+</section><section>
+  <h3>Jinja</h3>
+  <ul>
+    <li>Flask utilise <a href="https://jinja.palletsprojects.com/">Jinja</a> comme moteur de <em>templating</em>. Jinja peut générer n’importe quel format texte : du HTML bien sûr, mais également du CSS, du Markdown, du LaTeX, du SVG…</li>
+    <li>Par défaut, on met les templates dans un dossier <code>templates</code>, au même niveau que le fichier Python.</li>
+    <li>Pour rendre un <em>template</em>, on utilise la fonction <code>render_template</code>.</li>
+  </ul>
+</section><section>
+  <h3>Exemple</h3>
+  <p><code>app.py</code></p>
+  <pre><code class="python">
+@app.route("/about/&lt;name>")
+def about_name(name):
+    return render_template("about_name.html", name=name)
+  </code></pre>
+  <p><code>templates/about_name.html</code></p>
+  <pre><code class="jinja2">
+&lt;a href="{{ url_for("hello_name", name=name) }}">
+  Say hello to {{ name }}
+&lt;/a>
+  </code></pre>
+</section><section>
+  <h3>Structures de contrôle</h3>
+  <pre><code class="jinja2">
+&lt;h1>Pair ou impair ?&lt;/h1>
+
+{% for i in range(10) %}
+  {% if i % 2 %}
+    &lt;p>{{ i }} est impair&lt;/p>
+  {% else %}
+    &lt;p>{{ i }} est pair&lt;/p>
+  {% endif %}
+{% endfor %}
+  </code></pre>
+</section><section>
+  <h3>Définition de variables</h3>
+  <pre><code class="jinja2">
+&lt;h1>Table de multiplication de 2&lt;/h1>
+
+{% for i in range(11) %}
+  {% set double = i * 2 %}
+  &lt;p>2 × {{ i }} = {{ double }}&lt;/p>
+{% endfor %}
+  </code></pre>
+</section><section>
+  <h3>Filtres</h3>
+  <pre><code class="jinja2">
+Say hello to {{ name|capitalize }}
+  </code></pre>
+  <p>Jinja propose <a href="https://jinja.palletsprojects.com/en/3.1.x/templates/#builtin-filters">de nombreux filtres par défaut</a>. Il est également possible de <a href="https://jinja.palletsprojects.com/en/3.1.x/api/#custom-filters">définir ses propres filtres</a>.</p>
+</section><section>
+  <h3>Héritage</h3>
+  <p><code>layout.html</code></p>
+  <pre><code class="jinja2">
+&lt;!DOCTYPE html>
+&lt;html>
+  &lt;head>&lt;title>Super Title&lt;/title>&lt;/head>
+  &lt;body>
+    &lt;h1>Super Title&lt;/h1>
+    {% block content %}{% endblock %}
+  &lt;/body>
+&lt;/html>
+  </code></pre>
+</section><section>
+  <p><code>about_name.html</code></p>
+  <pre><code class="jinja2">
+{% extends "layout.html" %}
+
+{% block content %}
+  &lt;p>Say hello to {{ name|capitalize }}&lt;/p>
+{% endblock %}
+  </code></pre>
+</section><section>
+  <h3>Échappement automatique</h3>
+  <p>Par défaut, pour les <em>templates</em> dont le nom termine par <code>*.html</code>, les variables affichées dans les <em>templates</em> sont échappées, c’est-à-dire que les balises HTML seront considérées comme du texte, et non pas du HTML.</p>
+  <pre><code class="python">
+@app.route("/about/&lt;name>")
+def about_name(name):
+    name = f"&lt;p>{name}&lt;/p>"
+    return render_template("about_name.html", name=name)
+  </code></pre>
+  <p style="background: #ccc; padding: 0.2em">http://localhost:5000/about/john</p>
+  <p style="border: 3px solid; border-top: none; padding: 1em; margin-top: -1em">Bonjour, &lt;p>john&lt;/p></p>
+</section><section>
+  <h2>Requêtes, méthodes, formulaires, réponses</h2>
+</section><section>
+  <h3>Requêtes</h3>
+  <p>Les informations contenues dans la requête HTTP sont accessibles dans l’objet <code>flask.request</code> :</p>
+  <pre><code class="python">
+from flask import request
+
+@app.route("/about/&lt;name>")
+def about_name(name):
+    print(request.method)  # "GET"
+    print(request.headers)  # dict-like of HTTP headers
+    print(request.form)  # dict-like of form data
+    print(request.environ)  # dict of WSGI env variables
+    return render_template("about_name.html", name=name)
+  </code></pre>
+</section><section>
+  <h3>Méthodes</h3>
+  <p>Par défaut, les routes Flask n’acceptent que les requêtes <code>GET</code>. Il est possible d’accepter d’autres méthodes (en particulier <code>POST</code> pour les formulaires) avec le paramètre <code>methods</code> du décorateur <code>app.route</code> :</p>
+  <pre><code class="python">
+@app.route("/user/new", methods=("GET", "POST"))
+def user_new():
+    if request.method == "POST":
+        ...  # Create user in database
+    else:
+        ...  # Render template with user creation form
+  </code></pre>
+</section><section>
+  <h3>Formulaires</h3>
+  <p>Les <em>templates</em> peuvent contenir des formulaires dont les données sont envoyées dans une requête <code>POST</code> :</p>
+  <pre><code class="jinja2">
+<form method="POST">
+  <label>
+    Name
+    <input type="text" name="username">
+  </label>
+  <input type="submit" value="Create user">
+</form>
+  </code></pre>
+</section><section>
+  <h3>Réponses</h3>
+  <p>Par défaut, lorsqu’une route renvoie du texte, Flask l’encapsule dans une réponse HTTP dont le code est 200. Des fonctions permettent de renvoyer d’autres codes, en particulier 3xx pour les redirections, ou 4xx/5xx pour les erreurs :</p>
+  <pre><code class="python">
+@app.route("/user/new", methods=("GET", "POST"))
+def user_new(name):
+    if request.method == "POST":
+        if request.form["name"] == "admin":
+            abort(403)  # Forbidden
+        ...  # Create user in database
+        return redirect(url_for("hello_world"))
+    else:
+        ...  # Render template with user creation form
+  </code></pre>
+</section><section>
+  <h2>Pour aller plus loin</h2>
+</section><section>
+  <h3><em>Quickstart</em></h3>
+  <p>Dans la documentation de Flask, la page <em><a href="https://flask.palletsprojects.com/en/2.2.x/quickstart/">Quickstart</a></em> propose une bonne introduction pour construire des applications simples.</p>
+  <p>La structure de ce diaporama suit celle du <em>Quickstart</em>, mais ne couvre pas autant de sujets.</p>
+</section><section>
+  <h3>Tutoriel</h3>
+  <p>La page <em><a href="https://flask.palletsprojects.com/en/2.2.x/tutorial/">Tutorial</a></em> permet de faire un tour complet des fonctionnalités de Flask. Elle est utile lorsque l’on veut faire des applications plus grandes et plus complexes.</p>
+</section>
