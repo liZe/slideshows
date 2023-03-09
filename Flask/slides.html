@@ -49,7 +49,7 @@ $ source env1/bin/activate
 </section><section>
   <h3>Comment ça marche ?</h3>
   <ul>
-    <li>Flask utilise un petit seveur HTTP écrit en Python, <a href="https://palletsprojects.com/p/werkzeug/">Werkzeug</a>.</li>
+    <li>Flask utilise un petit serveur HTTP écrit en Python, <a href="https://palletsprojects.com/p/werkzeug/">Werkzeug</a>.</li>
     <li>La commande <code>run</code> lance l’application, que Flask cherche par défaut dans <code>app.py</code>.</li>
   </ul>
 </section><section>
@@ -75,10 +75,12 @@ def hello_name(name):
   <h3>Génération d’URL</h3>
   <p>Les routes permettent à Flask de trouver la vue correspondant à une URL, mais également de faire l’inverse, à savoir de reconstruire une URL pour une vue donnée. On utilise pour cela la fonction <code>url_for</code>, qui prend en paramètres le nom de la vue et les éventuels paramètres de la vue.</p>
   <pre><code class="python">
+from flask import Flask, url_for
+
 @app.route("/about/")
 def about():
     john_url = url_for("hello_name", name="John")
-    return f"&lt;a href="{john_url}">Say hello to John&lt;/a>"
+    return f'&lt;a href="{john_url}">Say hello to John&lt;/a>'
   </code></pre>
   <p>La fonction <code>url_for</code> rend le code plus facile à maintenir, puisqu’elle permet de changer l’URL d’une vue sans changer tous les liens qui pointent vers elle.</p>
 </section><section>
@@ -105,6 +107,8 @@ url_for("static", filename="style.css")
   <h3>Exemple</h3>
   <p><code>app.py</code></p>
   <pre><code class="python">
+from flask import Flask, render_template
+
 @app.route("/about/&lt;name>")
 def about_name(name):
     return render_template("about_name.html", name=name)
