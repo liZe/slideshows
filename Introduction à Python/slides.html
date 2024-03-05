@@ -1,6 +1,6 @@
 <section>
   <h1>Introduction à Python</h1>
-  <p><a href="https://yabz.fr/">Guillaume Ayoub</a> − 2022/2023</p>
+  <p><a href="https://yabz.fr/">Guillaume Ayoub</a> − 2023/2024</p>
 </section><section>
   <ol>
     <li>Présentation</li>
@@ -99,8 +99,8 @@ for i in numbers:
     ligne.
   </p>
   <pre><code class="python hljs">
-# Ceci est un commentaire
-a = 1 + 2  # Ceci est aussi un commentaire
+# This is a comment
+a = 1 + 2  # This is a comment too
   </code></pre>
 </section><section>
   <h3>Nombres</h3>
@@ -128,7 +128,7 @@ d = 10 ** 100000
   <pre><code class="python hljs">
 name = 'Lulu'
 today = "Please, don't touch anything"
-hello = f'Salut {name}!'
+hello = f"Salut {name}!"
   </code></pre>
   <p>
     Le formatage permet d’intégrer des caractères ou d’autres objets dans une
@@ -144,11 +144,11 @@ hello = f'Salut {name}!'
 a = 2
 
 if a == 0:
-    print('zero')
+    print("zero")
 elif a == 1:
-    print('one')
+    print("one")
 else:
-    print('two or more')
+    print("two or more")
   </code></pre>
 </section><section>
   <h3>Booléens</h3>
@@ -185,8 +185,8 @@ while a > 0:
     listes (<code class="python">list</code>) et les n-uplets (<code class="python">tuple</code>).
   </p>
   <pre><code class="python hljs">
-new_list = ['a', 'b', 2]
-new_tuple = ('a', 'b', 2)
+new_list = ["a", "b", 2]
+new_tuple = ("a", "b", 2)
 new_list.append(7)
 print(new_list[1])
 print(new_list)
@@ -202,9 +202,9 @@ print(new_list)
     des clés.
   </p>
   <pre><code class="python hljs">
-fruit_color = {'banana': 'yellow', 'kiwi': 'green'}
-fruit_color['mango'] = 'orange'
-print(fruit_color['mango'])
+fruit_color = {"banana": "yellow", "kiwi": "green"}
+fruit_color["mango"] = "orange"
+print(fruit_color["mango"])
 print(fruit_color)
   </code></pre>
   <p>
@@ -221,14 +221,14 @@ print(fruit_color)
     d’opérations communes :
   </p>
   <pre><code class="python hljs">
-sequence = 'Rocket'
+sequence = "Rocket"
 
 print(sequence[3])
 print(sequence[0:3])
 print(sequence[3:0:-1])
 
 print(2 * sequence)
-print(sequence + ' League')
+print(sequence + " League")
   </code></pre>
 </section><section>
   <h3>Itérables</h3>
@@ -238,20 +238,20 @@ print(sequence + ' League')
     membres les uns après les autres :
   </p>
   <pre><code class="python hljs">
-iterable = 'Rocket'
+iterable = "Rocket"
 
 for i in iterable:
     print(i)
   </code></pre>
 </section><section>
-  <h3>Muables</h3>
+  <h3>Mutables</h3>
   <p>
-    Certains objets en Python sont muables
+    Certains objets en Python sont mutables
     (<code class="python">dict</code>, <code class="python">list</code>…), d’autres sont immuables
     (<code class="python">str</code>, <code class="python">int</code>, <code class="python">tuple</code>…).
   </p>
   <p>
-    Les objets muables peuvent être modifiés grâce à des méthodes qui leur sont
+    Les objets mutables peuvent être modifiés grâce à des méthodes qui leur sont
     propres (par exemple <code class="python">append</code>). Ces méthodes modifient l’objet
     « en place » et ne revoient généralement rien (<code class="python">None</code>).
   </p>
@@ -272,11 +272,11 @@ print(double(21))
 </section><section>
   <h3>Valeurs par défaut</h3>
   <pre><code class="python hljs">
-def fly(animal='ducks'):
+def fly(animal="ducks"):
     """Print that an animal can fly."""
-    print(f'{animal} can fly')
+    print(f"{animal} can fly")
 
-fly('bees')
+fly("bees")
 fly()
   </code></pre>
 </section><section>
@@ -284,21 +284,21 @@ fly()
   <pre><code class="python hljs">
 from pathlib import Path
 
-Path('/tmp/test').write_text('hello')
-print(Path('/tmp/test').read_text())
+Path("/tmp/test").write_text("hello")
+print(Path("/tmp/test").read_text())
   </code></pre>
 </section><section>
   <h3>Exceptions</h3>
   <pre><code class="python hljs">
 try:
-    print('Division')
+    print("Division")
     1 / 0
 except ZeroDivisionError as error:
     print(error)
 else:
-    print('OK!')
+    print("OK!")
 finally:
-    print('finally')
+    print("finally")
   </code></pre>
   <p>
     Les exceptions qui ne sont pas traitées sont remontées à la fonction
@@ -335,7 +335,7 @@ finally:
 </section><section>
   <h3>Le problème de l’installation globale</h3>
   <p>On veut pouvoir installer des programmes utilisant des versions précises de Python et des modules externes.</p>
-  <p>Par défaut, l’installation de ces modules se fait au niveau du système. Python permet également à chaque personne d’installer des modules uniquement pour elle.</p>
+  <p>Par défaut, l’installation de ces paquets se fait au niveau du système. Python permet également à chaque personne d’installer des modules uniquement pour elle.</p>
 </section><section>
   <h3>Les environnements virtuels</h3>
   <p>Les environnements virtuels permettent de créer des sous-systèmes indépendants, avec leur interpréteur et leurs modules accessibles uniquement depuis l’environnement.</p>
@@ -362,9 +362,9 @@ class Animal:
 
     def say_hello(self):
        """Print a little presentation of the animal."""
-        print(f'Hello! My name is {self.name}.')
+        print(f"Hello! My name is {self.name}.")
 
-tweety = Animal('Tweety')
+tweety = Animal("Tweety")
 tweety.say_hello()
   </code></pre>
 </section><section>
@@ -403,7 +403,7 @@ class Duck(Animal):
     def say_hello(self):
         print(f"I'm a duck, my name is {self.name}.")
 
-daffy = Duck('Daffy')
+daffy = Duck("Daffy")
 daffy.say_hello()
   </code></pre>
   <p>
@@ -419,9 +419,9 @@ class Bunny(Animal):
     """Representation of a bunny."""
     def say_hello(self):
         super().say_hello()
-        print("I'm a bunny.")
+        print("I’m a bunny.")
 
-bugs = Bunny('Bugs')
+bugs = Bunny("Bugs")
 bugs.say_hello()
   </code></pre>
   <p>
@@ -573,8 +573,9 @@ odd_lazy = (i for i in range(10**10) if i%2)
     sont même considérées comme des standards.
   </p>
   <p>
-    Concernant le web, Flask et Django sont les <em>frameworks</em> les plus
-    utilisés. Côté client, on utilise Requests pour effectuer des requêtes HTTP.
+    Flask et Django sont les <em>frameworks</em> les plus utilisés pour le web,
+    et FastAPI pour les API. Côté client, on utilise Requests pour effectuer
+    des requêtes HTTP.
   </p>
   <p>
     Dans le monde scientifique, des outils sont extrêmement répandus, parmi
@@ -582,7 +583,7 @@ odd_lazy = (i for i in range(10**10) if i%2)
   </p>
   <p>
     Enfin, les bibliothèques utilisées pour le <em>packaging</em> sont très
-    largement utilisées : Pip, Setuptools, Wheel et Pipenv sont parmi les
+    populaires : Pip, Setuptools, Wheel et Pipenv sont parmi les
     modules externes les plus téléchargés sur PyPI. D’autres outils comme
     SQLAlchemy, Pytest et Pillow sont également très utilisés.
   </p>
@@ -590,7 +591,8 @@ odd_lazy = (i for i in range(10**10) if i%2)
   <h3>Utilisations</h3>
   <p>
     Python est actuellement
-    <a href="https://insights.stackoverflow.com/trends?tags=java%2Cc%2Cc%2B%2B%2Cpython%2Cc%23%2Cvb.net%2Cjavascript%2Cassembly%2Cphp%2Cperl%2Cruby%2Cvb%2Cswift%2Cr%2Cobjective-c">le
+    <a href="https://www.tiobe.com/tiobe-index/">en tête du classement TIOBE</a> et est
+    <a href="https://insights.stackoverflow.com/trends?tags=java%2Cc%2Cc%2B%2B%2Cpython%2Cc%23%2Cjavascript%2Cphp%2Crust">le
     langage dont on discute le plus sur StackOverflow</a>.
   </p>
   <p>
