@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 800" font-size="12pt" width="30em" font-family="Arial">
+  <defs>
+    <g id="commit">
+      <circle r="8" fill="black" />
+    </g>
+  </defs>
+
+  <g stroke="black" stroke-width="3">
+    <line x1="50" x2="50" y1="750" y2="650" />
+    <line x1="50" x2="50" y1="650" y2="550" />
+    <line x1="50" x2="200" y1="650" y2="550" />
+    <line x1="50" x2="50" y1="550" y2="450" />
+    <line x1="200" x2="50" y1="550" y2="450" />
+    <line x1="50" x2="50" y1="450" y2="350" />
+    <line x1="50" x2="50" y1="350" y2="250" />
+    <line x1="50" x2="200" y1="350" y2="250" />
+    <line x1="50" x2="50" y1="250" y2="150" />
+    <line x1="200" x2="200" y1="250" y2="150" />
+    <line x1="50" x2="50" y1="150" y2="50" />
+  </g>
+
+  <g transform="translate(50 750)">
+    <use href="#commit" />
+    <text x="15" alignment-baseline="middle">727a1df</text>
+    <text x="15" y="20" alignment-baseline="middle">(commit initial)</text>
+  </g>
+  <g transform="translate(50 650)">
+    <use href="#commit" />
+    <text x="15" alignment-baseline="middle">1b423a8</text>
+  </g>
+  <g transform="translate(50 550)">
+    <use href="#commit" />
+    <text x="15" alignment-baseline="middle">7024354</text>
+  </g>
+  <g transform="translate(200 550)">
+    <use href="#commit" />
+    <text x="15" alignment-baseline="middle">9685ab5</text>
+  </g>
+  <g transform="translate(50 450)">
+    <use href="#commit" />
+    <text x="15" alignment-baseline="middle">4925fbb</text>
+  </g>
+  <g transform="translate(50 350)">
+    <use href="#commit" />
+    <text x="15" alignment-baseline="middle">072940e</text>
+  </g>
+  <g transform="translate(50 250)">
+    <use href="#commit" />
+    <text x="15" alignment-baseline="middle">27d7ef8</text>
+  </g>
+  <g transform="translate(200 250)">
+    <use href="#commit" />
+    <text x="15" alignment-baseline="middle">a49f22a</text>
+  </g>
+  <g transform="translate(50 150)">
+    <use href="#commit" />
+    <text x="15" alignment-baseline="middle">1efcf4b</text>
+  </g>
+  <g transform="translate(200 150)">
+    <use href="#commit" />
+    <text x="15" alignment-baseline="middle">6eb188c</text>
+    <rect x="10" y="13" width="100" height="2em" fill="green" rx="15" />
+    <text x="60" y="30" text-anchor="middle" alignment-baseline="middle" fill="white">feature</text>
+  </g>
+  <g transform="translate(50 50)">
+    <use href="#commit" />
+    <text x="15" alignment-baseline="middle">83161a1</text>
+    <rect x="10" y="13" width="100" height="2em" fill="green" rx="15" />
+    <text x="60" y="30" text-anchor="middle" alignment-baseline="middle" fill="white">main</text>
+    <rect x="120" y="13" width="100" height="2em" fill="purple" rx="15" />
+    <text x="170" y="30" text-anchor="middle" alignment-baseline="middle" fill="white">HEAD</text>
+  </g>
+4925fbbf04eb727a1df0dc4b2e3d643f4eb5b856
+  <g transform="translate(270 580)">
+    <rect stroke-width="1" width="270" height="210" fill="none" stroke="black" />
+    <text x="15" y="25" font-size="0.9em">Légende</text>
+    <g transform="translate(15 30)">
+      <rect x="0" y="13" width="100" height="2em" fill="purple" rx="15" />
+      <text x="50" y="30" text-anchor="middle" alignment-baseline="middle" fill="white">HEAD</text>
+      <text x="110" y="30" alignment-baseline="middle">Commit actuel</text>
+    </g>
+    <g transform="translate(15 70)">
+      <rect x="0" y="13" width="100" height="2em" fill="green" rx="15" />
+      <text x="50" y="30" text-anchor="middle" alignment-baseline="middle" fill="white">main</text>
+      <text x="110" y="30" alignment-baseline="middle">Branche</text>
+    </g>
+    <g transform="translate(15 150)">
+      <use transform="translate(15 30)" href="#commit" />
+      <text x="30" y="30" alignment-baseline="middle">a49f22a</text>
+      <text x="110" y="30" alignment-baseline="middle">Commit</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,492 @@
+<section>
+  <h1>Introduction à <span style="color: transparent; text-shadow: none; background: url(static/git.svg) left / contain no-repeat; width: 3em; display: inline-block">Git</span></h1>
+  <a href="https://yabz.fr/">Guillaume Ayoub</a> − 2024/2025
+</section><section>
+  <pre>commit 8bc9a0c769ac1df7820f2dbf8f7b7d64835e3c68
+tree 4f856748145b27bc669a98cd4d66574dfd01b083
+parent e83c5163316f89bfbde7d9ab23ca2e25604af290
+author Linus Torvalds &lt;torvalds@ppc970.osdl.org> 1112912170 -0700
+committer Linus Torvalds &lt;torvalds@ppc970.osdl.org> 1112912170 -0700
+
+Add copyright notices.
+
+The tool interface sucks (especially "committing" information, which is just
+me doing everything by hand from the command line), but I think this is in
+theory actually a viable way of describing the world. So copyright it.</pre>
+</section><section>
+  <h2>Quel est le but de cette formation ?</h2>
+  <ul>
+    <li><strong>Comprendre le fonctionnement</strong> de Git</li>
+    <li><strong>Savoir utiliser l’outil en ligne de commande</strong> sur des projets</li>
+    <li><strong>Acquérir des bases solides</strong> pour utiliser à l’avenir des outils de haut niveau</li>
+  </ul>
+</section><section>
+  <ol>
+    <li>Historique</li>
+    <li>Vocabulaire</li>
+    <li>Premières commandes</li>
+    <li>Naviguer dans l’historique</li>
+    <li>Manipuler les branches</li>
+    <li>Partager son dépôt et travailler à plusieurs</li>
+    <li>Aller plus loin</li>
+  </ol>
+</section><section>
+  <h2>Historique</h2>
+</section><section>
+  <h3>Git est un logiciel de gestion de versions</h3>
+  <p>
+    Mais au fait… À quoi sert un gestionnaire de versions ?
+  </p>
+</section><section>
+  <h3>Ça commence il y a très longtemps</h3>
+  <p>
+    Dès les années 70, on crée des outils pour <strong>garder trace de l'évolution</strong>
+    des projets (SCCS en 1972, RCS en 1982).
+  </p>
+  <p>
+    On cherche ensuite à <strong>partager en ligne</strong> les projets (CVS en
+    1990, Subversion en 2000).
+  </p>
+  <p>
+    La génération suivante cherche à <strong>décentraliser</strong> le
+    développement (BitKeeper en 2000, Git et Mercurial en 2005).
+  </p>
+</section><section>
+  <h3>Aujourd’hui</h3>
+  <p>
+    Git est de très loin
+    <strong>l’outil de gestion de versions le plus utilisé</strong>
+    aujourd'hui.
+  </p>
+  <p>
+    D'autres outils sont également utilisés, souvent pour des usages
+    particuliers : Mercurial, Subversion, Perforce…
+  </p>
+</section><section>
+  <h2>Vocabulaire</h2>
+</section><section>
+  <h3>Les espaces de stockage</h3>
+</section><section>
+  <h4>L’arbre de travail <em>(workspace)</em></h4>
+  <p>
+    Ce sont <strong>les fichiers</strong> que l’on peut lister, créer,
+    modifier, supprimer avec un explorateur de fichiers. Ces fichiers sont dans
+    un dossier et ses sous-dossiers, structurés dans une arborescence.
+  </p>
+  <p>
+    Le gestionnaire de versions utilisera l’arbre de travail comme
+    <strong>source pour sauvegarder les changements</strong> effectués dans ces
+    fichiers, et
+    <strong>comme destination pour restaurer les fichiers</strong> tels qu’ils
+    étaient à une version donnée.
+  </p>
+</section><section>
+  <h4>Le dépôt local <em>(local repository)</em></h4>
+  <p>
+    C’est <strong>l’historique de toutes les versions</strong> qui ont été
+    enregistrées. Il contient absolument tout l’historique des versions, et
+    donne la possibilité de restaurer les fichiers tels qu’ils étaient pour
+    chacune de ces versions.
+  </p>
+  <p>
+    Il est stocké dans le dossier caché <code>.git</code>.
+  </p>
+</section><section>
+  <h4>L’index</h4>
+  <p>
+    C’est la <strong>zone tampon qui permet de préparer les nouvelles versions</strong> à
+    ajouter au dépôt local. On y ajoute les modifications effectuées dans
+    l’arbre de travail que l’on veut sauvegarder dans une nouvelle version.
+  </p>
+  <p>
+    Il est également stocké dans le dossier caché <code>.git</code>.
+  </p>
+</section><section>
+  <h4>Le dépôt distant <em>(upstream repository)</em></h4>
+  <p>
+    C’est un <strong>serveur distant, généralement sur internet, qui contient le dépôt
+    partagé</strong> par les différentes personnes participant au projet.
+  </p>
+  <p>
+    Ce dépôt sert souvent à centraliser l’information : les protagonistes y
+    envoient leurs nouvelles versions et récupèrent les versions des autres.
+  </p>
+</section><section>
+  <h3>Anatomie d’un dépôt</h3>
+</section><section>
+  <h4>La version <em>(commit)</em></h4>
+  <p>
+    <strong>Une version contient l’état de tous les fichiers qu’elle référence.</strong>
+  </p>
+  <p>
+    Elle contient également des métadonnées : auteur, date et heure, version(s)
+    parente(s), etc.
+  </p>
+  <p>
+    Elle a un numéro, généralement affiché en hexadécimal. Ce numéro est généré
+    automatiquement à partir des informations de la version. On ne peut donc
+    pas modifier une version en gardant le même numéro.
+  </p>
+</section><section>
+  <h4>La branche <em>(branch)</em></h4>
+  <p>
+    <strong>Une branche est un nom donné à une suite de versions.</strong>
+  </p>
+  <p>
+    On utilise souvent une branche principale (un tronc), nommée
+    <code>main</code> ou <code>master</code>, et d’autres branches pour
+    développer des fonctionnalités en parallèle.
+  </p>
+  <p>
+    Une branche peut diverger du tronc ou d’autres branches. Elles peuvent
+    également être fusionnées avec d’autres branches.
+  </p>
+  <p>
+    Techniquement, une branche est un pointeur vers une version.
+  </p>
+</section><section>
+  <h4>La tête <em>(HEAD)</em></h4>
+  <p>
+    <strong>La tête correspond à la version courante,</strong> c’est-à-dire la
+    dernière version que l’on a créée ou que l’on a restaurée.
+  </p>
+  <p>
+    Techniquement, <code>HEAD</code> est un pointeur vers une version ou une
+    branche.
+  </p>
+</section><section>
+  <img src="static/depot.svg" alt="Un schéma montrant l’anatomie d’un dépôt Git">
+</section><section>
+  <h2>Premières commandes</h2>
+</section><section>
+  <h3>Installation</h3>
+  <p>
+    <strong>Sous Linux et macOS,</strong> Git est peut-être déjà installé.
+    <code>git version</code> tapé dans un terminal indiquera la version
+    installée, ou une méthode pour l’installer si ce n’est déjà le cas.
+  </p>
+  <p>
+    <strong>Sous Windows,</strong> l’outil
+    <a href="https://github.com/git-for-windows/git">Git for Windows</a>
+    propose une version de Git spécialement configurée pour Windows.
+  </p>
+</section><section>
+  <h3><code>config</code></h3>
+  <p>
+    Affiche et modifie la configuration de Git et du dépôt.
+  </p>
+  <pre><span class="vert">alice@laptop</span>:<span class="bleu">~</span>$ git config user.email
+alice@wonderland.org
+<span class="vert">alice@laptop</span>:<span class="bleu">~</span>$ git config user.name "Alice Liddell"</pre>
+</section><section>
+  <h3><code>init</code></h3>
+  <p>
+    Crée un nouveau dépôt vide.
+  </p>
+  <pre><span class="vert">alice@laptop</span>:<span class="bleu">~</span>$ git init depot
+Dépôt Git vide initialisé dans /home/alice/depot/.git/
+<span class="vert">alice@laptop</span>:<span class="bleu">~</span>$ cd depot
+<span class="vert">alice@laptop</span>:<span class="bleu">~/depot</span>$ git status
+Sur la branche main
+Aucun commit</pre>
+</section><section>
+  <h3><code>status</code></h3>
+  <p>
+    Affiche le statut actuel de l’arbre de travail.
+  </p>
+  <pre><span class="vert">alice@laptop</span>:<span class="bleu">~/depot</span>$ git status
+Sur la branche main
+Fichiers non suivis:
+  (utilisez "git add &lt;fichier>..." pour inclure dans ce qui sera validé)
+	paragraphe6.txt
+[…]</pre></dd>
+</section><section>
+  <h3><code>add</code>, <code>mv</code>, <code>rm</code></h3>
+  <p>
+    Ajoute les modifications du contenu de fichiers à l’index.
+  </p>
+  <p>
+    En plus, <code>mv</code> déplace un fichier sur l’espace de travail, et
+    <code>rm</code> supprime le fichier de l’espace de travail.
+  </p>
+  <pre><span class="vert">alice@laptop</span>:<span class="bleu">~/depot/</span>$ git add paragraphe1.txt</pre>
+</section><section>
+  <h3><code>commit</code></h3>
+  <p>
+    Enregistre les changements de l’index dans le dépôt local.
+  </p>
+  <pre><span class="vert">alice@laptop</span>:<span class="bleu">~/depot/</span>$ git commit -m "Ajout d’un fichier"
+[main 2e363ea] Ajout d’un fichier
+ 1 file changed, 3 insertions(+), 0 deletions(-)
+ create mode 100644 paragraphe1.txt
+</pre>
+</section><section>
+  <h3><code>log</code></h3>
+  <p>
+    Affiche un historique des <em>commits</em>, par défaut ceux de la branche
+    actuelle.
+  </p>
+  <pre><span class="vert">alice@laptop</span>:<span class="bleu">~/depot</span>$ git log
+<span class="jaune">commit a75af376edaf0ff80b54d92ed46fba8e997e2ce7 (<span class="bleu">HEAD</span> -> <span class="vert">master</span>)</span>
+Author: Alice Liddell &lt;alice@wonderland.org>
+Date:   Tue Dec 19 14:25:06 2023 +0100
+
+    Changement du nom Alice en Leia dans le 5e paragraphe
+
+<span class="jaune">commit 659aad7b4205b25cadb10785108cc5fe71526c90</span>
+Merge: d15cd74 ddd4ab7
+Author: Alice Liddell &lt;alice@wonderland.org>
+Date:   Tue Dec 19 14:24:53 2023 +0100
+
+    Merge branch 'caroll-leia'
+
+[…]</pre>
+</section><section>
+  <h2>Naviguer dans l’historique</h2>
+</section><section>
+  <h3><code>clone</code></h3>
+  <p>
+    Télécharge un dépôt et le met dans un nouveau dossier.
+  </p>
+  <pre><span class="vert">alice@laptop</span>:<span class="bleu">~</span>$ git clone https://github.com/git/git
+Clonage dans 'git'...
+[…]
+<span class="vert">alice@laptop</span>:<span class="bleu">~</span>$ cd git
+<span class="vert">alice@laptop</span>:<span class="bleu">~/xxx</span>$ git log
+[…]</pre>
+</section><section>
+  <h3><code>checkout</code></h3>
+  <p>
+    Bascule sur un <em>commit</em> et met à jour les fichiers de l’arbre de
+    travail.
+  </p>
+  <pre><span class="vert">alice@laptop</span>:<span class="bleu">~/depot/</span>$ git checkout d15cd74
+Note : basculement sur 'd15cd74'.
+Vous êtes dans l'état « HEAD détachée ». […]
+HEAD est maintenant sur d15cd74 Ajout du 5e paragraphe
+<span class="vert">alice@laptop</span>:<span class="bleu">~/depot/</span>$ git checkout main
+La position précédente de HEAD était sur d15cd74 Ajout du 5e paragraphe
+Basculement sur la branche 'main'</pre>
+</section><section>
+  <h3><code>diff</code></h3>
+  <p>
+    Affiche les modifications entre deux <em>commits</em>, ou entre un <em>commit</em> et l’arbre de travail.
+  </p>
+  <pre><span class="vert">alice@laptop</span>:<span class="bleu">~</span>$ git diff
+<span class="jaune">diff --git a/paragraphe1.txt b/paragraphe1.txt
+index 65a4c91..c06a09e 100644
+--- a/paragraphe1.txt
++++ b/paragraphe1.txt</span>
+<span class="violet">@@ -1,4 +1,4 @@</span>
+ LEIA, assise auprès de son chien sur le gazon, commençait à s’ennuyer
+ de rester là à ne rien faire; une ou deux fois elle avait jeté les yeux sur le livre
+<span class="rouge">-que lisait son chien; mais quoi! pas d’images, pas de dialogues! “La belle</span>
+<span class="vert">+que lisait son chien; mais quoi! pas de photos, pas de dialogues! “La belle</span>
+ avance,” 2 pensait Leia, “qu’un livre sans images, sans causeries!”.
+</pre>
+</section><section>
+  <h3><code>restore</code></h3>
+  <p>
+    Restaure les fichiers de l’arbre de travail dans l’état du
+    <em>commit</em> actuel.
+  </p>
+  <pre><span class="vert">alice@laptop</span>:<span class="bleu">~/depot/</span>$ git restore paragraphe1.txt</pre>
+</section><section>
+  <h2>Manipuler les branches</h2>
+</section><section>
+  <h3><code>branch</code></h3>
+  <p>
+    Liste, crée ou supprime des branches.
+  </p>
+  <pre><span class="vert">alice@laptop</span>:<span class="bleu">~/depot/</span>$ git branch
+  <span class="jaune">caroll-leia</span>
+  <span class="jaune">lewis-bleu</span>
+* <span class="vert">main</span>
+<span class="vert">alice@laptop</span>:<span class="bleu">~/depot/</span>$ git branch lewis-chien
+<span class="vert">alice@laptop</span>:<span class="bleu">~/depot/</span>$ git branch --delete caroll-leia
+Branche caroll-leia supprimée (précédemment 69743d5).</pre>
+</section><section>
+  <h3><code>switch</code></h3>
+  <p>
+    Change de branche.
+  </p>
+  <pre><span class="vert">alice@laptop</span>:<span class="bleu">~/depot/</span>$ git switch lewis-bleu
+Basculement sur la branche 'lewis-bleu'</pre>
+</section><section>
+  <h3><code>merge</code></h3>
+  <p>
+    Fusionne deux branches. Cela revient généralement à créer un <em>commit</em> qui a deux parents : la branche actuelle et
+    la branche que l’on veut <em>merger</em>.
+  </p>
+  <pre><span class="vert">alice@laptop</span>:<span class="bleu">~/depot/</span>$ git merge lewis-bleu -m "Fusion de lewis-bleu"
+Merge made by the 'ort' strategy.
+paragraphe2.txt | 2 <span class="vert">+</span><span class="rouge">-</span>
+ 1 file changed, 1 insertion(+), 1 deletion(-)</pre>
+  <p>
+    L’option <code>-m</code> permet de saisir le message
+    du <em>commit</em> de fusion directement depuis le terminal.
+    Sinon, l’éditeur de texte par défaut est ouvert.
+  </p>
+</section><section>
+  <h2>Partager son dépôt et travailler à plusieurs</h2>
+</section><section>
+  <h3>Forges logicielles</h3>
+  <p>
+    <strong>Les <a href="https://fr.wikipedia.org/wiki/Forge_(informatique)">forges logicielles</a>
+    sont des plateformes en ligne</strong> permettant de
+    partager du code et de gérer de nombreux aspects de son développement :
+    tickets, demandes de fusion, revues de code, documentation, intégration et
+    déploiement continus…
+  </p>
+</section><section>
+  <h3>GitHub</h3>
+  <p>
+    <strong>La forge la plus populaire est <a href="https://github.com/">GitHub</a>.</strong>
+    GitHub permet de créer gratuitement des dépôts publics ou privés, et de
+    suivre en ligne l’avancement du développement.
+  </p>
+  <p>
+    D’autres forges existent,
+    comme <a href="https://about.gitlab.com/">GitLab</a> ou
+    <a href="https://bitbucket.org/product/">Bitbucket</a>.
+  </p>
+</section><section>
+  <h3><code>fetch</code></h3>
+  <p>
+    Télécharge les objets et les références d’un dépôt.
+  </p>
+  <p>
+    Il est essentiellement utilisé pour récupérer les nouveaux
+    <em>commits</em>, les nouvelles branches et les nouvelles
+    étiquettes du dépôt distant qui correspond au dépôt local.
+  </p>
+  <pre><span class="vert">alice@laptop</span>:<span class="bleu">~/depot</span>$ git fetch
+[…]
+Depuis git://example.com/git/depot
+   a04786b93..ee07a8118  main       -> origin/main
+ * [nouvelle étiquette]  v1.2       -> v1.2
+[…]</pre>
+</section><section>
+  <h3><code>pull</code></h3>
+  <p>
+    Récupère les informations du dépôt distant et les intègre dans le dépôt
+    local.
+  </p>
+  <p>
+    Cette commande est généralement utilisée pour récupérer les
+    <em>commits</em> qui ont été faits sur le dépôt distant, et pour les
+    intégrer sur la branche actuelle du dépôt local.
+  </p>
+  <p>
+    Par exemple, si le dépôt local est sur la branche « main », il revient à
+    faire <code>git fetch</code> puis <code>git merge origin/main</code>.
+  </p>
+  <pre><span class="vert">alice@laptop</span>:<span class="bleu">~/depot</span>$ git pull
+[…]
+Mise à jour a04786b93..ee07a8118
+Fast-forward
+fichier1           |  241 <span class="vert">+++++++</span><span class="rouge">---</span>
+[…]</code></pre>
+</section><section>
+  <h3><code>push</code></h3>
+  <p>
+    Envoie les informations du dépôt local sur le dépôt distant.
+  </p>
+  <p>
+    Cette commande est généralement utilisée pour envoyer sur le dépôt distant
+    les <em>commits</em> que l’on a faits sur le dépôt local.
+  </p>
+  <pre><span class="vert">alice@laptop</span>:<span class="bleu">~/depot</span>$ git push
+Poussée vers git://example.com/git/depot
+[…]
+To git://example.com/git/depot
+   fcca709..ce796c9  main -> main
+[…]</pre>
+</section><section>
+  <h2>Aller plus loin</h2>
+</section><section>
+  <h3>Quelques commandes utiles</h3>
+  <ul>
+    <li><code>tag</code>,</li>
+    <li><code>revert</code>,</li>
+    <li><code>remote</code>,</li>
+    <li><code>submodule</code>,</li>
+    <li><code>cherry-pick</code>,</li>
+    <li><code>rebase</code>,</li>
+    <li><code>blame</code>,</li>
+    <li><code>bisect</code>,</li>
+    <li><code>grep</code>,</li>
+    <li><code>stash</code>,</li>
+    <li><code>worktree</code>…</li>
+  </ul>
+</section><section>
+  <h3><code>.gitignore</code></h3>
+  <p>
+    Ce fichier, placé à la racine d’un projet, permet de lister des dossiers et
+    fichiers que l’on ne souhaite pas versionner.
+  </p>
+</section><section>
+  <h3>Plomberie et porcelaine</h3>
+  <p>
+    Les commandes de Git sont séparées en deux parties : la plomberie et la
+    porcelaine:
+  </p>
+  <ul>
+    <li><strong>la plomberie correspond aux commandes internes,</strong> rarement voire pas du tout utilisées publiquement,</li>
+    <li><strong>la porcelaine correspond aux commandes souvent utilisées,</strong> qui peuvent en interne utiliser la plomberie.</li>
+  </ul>
+  <p>
+    Git est connu pour avoir une plomberie simple et bien structurée, mais une
+    porcelaine confuse et trop proche de la plomberie.
+  </p>
+</section><section>
+  <h3>Bifurcation <em>(fork)</em></h3>
+  <p>
+    Une fonctionnalité puissante des forges logiciel est de proposer à
+    n’importe quel utilisateur de <strong><em>forker</em> le dépôt d’une autre
+    personne.</strong> Cette opération consiste à copier le dépôt dans son compte
+    personnel afin de pouvoir y effectuer des modifications, sans modifier
+    directement le projet original. Si l’on veut que ces modifications soient
+    ensuite intégrées dans le dépôt de base, <strong>il est possible d’ouvrir une
+    <em>pull request</em></strong> qui permettra de faire une
+    revue de code et potentiellement de <em>merger</em> les
+    changements dans la branche principale.
+  </p>
+</section><section>
+  <h3>Stratégies <em>(workflows)</em></h3>
+  <p>
+    Rien ne dicte dans Git comment ces branches doivent être gérées globalement
+    dans le développement d’un projet. C’est la raison pour laquelle <strong>des
+    stratégies <em>(workflows)</em> de gestion de branches ont été pensées et
+    proposées.</strong>
+  </p>
+  <ul>
+    <li>
+      <a href="https://nvie.com/posts/a-successful-git-branching-model/">Git Flow</a>
+      est plutôt lourde, adaptée au projets conséquents, particulièrement aux
+      logiciels dont plusieurs versions sont maintenues en parallèle.
+    </li>
+    <li>
+      <a href="https://docs.github.com/fr/get-started/using-github/github-flow">GitHub Flow</a>
+      est une stratégie plus légère et plus simple, adaptée aux projets
+      déployés en continu.
+    </li>
+    <li>
+      <a href="https://about.gitlab.com/topics/version-control/what-is-gitlab-flow/">GitLab Flow</a>
+      constitue une stratégie intermédiaire, plus complexe mais moins limitée
+      que GitHub Flow.
+    </li>
+    <li>
+      <a href="https://trunkbaseddevelopment.com/">Trunk Based Development</a>
+      propose une approche très légère où la plupart des branches sont
+      rapidement intégrées dans la branche principale. Elle est
+      particulièrement efficace mais requiert une équipe mûre et aguerrie.
+    </li>
+  </ul>
+</section><section>
+  <h3>Liens</h3>
+  <ul>
+    <li><a href="https://git-scm.com/docs">Documentation de référence</a></li>
+    <li><a href="https://ohmygit.org/">Oh My Git</a></li>
+  </ul>
+</section>

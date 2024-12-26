@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 420 520" font-size="7pt" font-family="Arial">
+  <g stroke="black" stroke-width="1" fill="none">
+    <g transform="translate(0 0)">
+      <rect x="10" y="10" width="80" height="480" />
+      <text x="50" y="25" text-anchor="middle" stroke="none" fill="black">Espace de travail</text>
+    </g>
+    <g transform="translate(100 0)">
+      <rect x="10" y="10" width="80" height="480" />
+      <text x="50" y="25" text-anchor="middle" stroke="none" fill="black">Index</text>
+    </g>
+    <g transform="translate(200 0)">
+      <rect x="10" y="10" width="80" height="480" />
+      <text x="50" y="25" text-anchor="middle" stroke="none" fill="black">Dépôt local</text>
+    </g>
+    <g transform="translate(300 0)">
+      <rect x="10" y="10" width="80" height="480" />
+      <text x="50" y="25" text-anchor="middle" stroke="none" fill="black">Dépôt distant</text>
+    </g>
+  </g>
+
+  <g stroke="black" stroke-width="1" transform="translate(0 50)">
+    <g transform="translate(50 0)">
+      <polygon fill="white" points="0,0 300,0 300,20 0,20 -20,10" />
+      <text x="150" y="10" text-anchor="middle" alignment-baseline="middle" stroke="none" fill="black">clone</text>
+    </g>
+    <g transform="translate(50 90)">
+      <polygon fill="white" points="0,0 300,0 300,20 0,20 -20,10" />
+      <text x="150" y="10" text-anchor="middle" alignment-baseline="middle" stroke="none" fill="black">pull</text>
+    </g>
+    <g transform="translate(50 30)">
+      <polygon fill="white" points="200,0 300,0 300,20 200,20 180,10" />
+      <text x="250" y="10" text-anchor="middle" alignment-baseline="middle" stroke="none" fill="black">fetch</text>
+    </g>
+    <g transform="translate(50 180)">
+      <polygon fill="white" points="200,0 300,0 320,10 300,20 200,20" />
+      <text x="250" y="10" text-anchor="middle" alignment-baseline="middle" stroke="none" fill="black">push</text>
+    </g>
+    <g transform="translate(50 60)">
+      <polygon fill="white" points="0,0 200,0 200,20 0,20 -20,10" />
+      <text x="100" y="10" text-anchor="middle" alignment-baseline="middle" stroke="none" fill="black">merge</text>
+    </g>
+    <g transform="translate(50 270)">
+      <polygon fill="white" points="0,0 200,0 200,20 0,20 -20,10" />
+      <text x="100" y="10" text-anchor="middle" alignment-baseline="middle" stroke="none" fill="black">switch</text>
+    </g>
+    <g transform="translate(50 210)">
+      <polygon fill="white" points="170,0 230,0 230,20 170,20" />
+      <text x="200" y="10" text-anchor="middle" alignment-baseline="middle" stroke="none" fill="black">branch</text>
+    </g>
+    <g transform="translate(50 240)">
+      <polygon fill="white" points="170,0 230,0 230,20 170,20" />
+      <text x="200" y="10" text-anchor="middle" alignment-baseline="middle" stroke="none" fill="black">tag</text>
+    </g>
+    <g transform="translate(50 120)">
+      <polygon fill="white" points="0,0 100,0 120,10 100,20 0,20" />
+      <text x="50" y="10" text-anchor="middle" alignment-baseline="middle" stroke="none" fill="black">add</text>
+    </g>
+    <g transform="translate(50 150)">
+      <polygon fill="white" points="100,0 200,0 220,10 200,20 100,20" />
+      <text x="150" y="10" text-anchor="middle" alignment-baseline="middle" stroke="none" fill="black">commit</text>
+    </g>
+    <g transform="translate(50 300)">
+      <polygon fill="white" points="0,0 100,0 100,20 0,20 -20,10" />
+      <text x="50" y="10" text-anchor="middle" alignment-baseline="middle" stroke="none" fill="black">checkout</text>
+    </g>
+    <g transform="translate(50 330)">
+      <polygon fill="white" points="0,0 100,0 100,20 0,20 -20,10" />
+      <text x="50" y="10" text-anchor="middle" alignment-baseline="middle" stroke="none" fill="black">restore</text>
+    </g>
+    <g transform="translate(50 360)">
+      <polygon fill="white" points="0,0 100,0 100,20 0,20" />
+      <text x="50" y="10" text-anchor="middle" alignment-baseline="middle" stroke="none" fill="black">status</text>
+    </g>
+    <g transform="translate(50 390)">
+      <polygon fill="white" points="0,0 100,0 100,20 0,20" />
+      <text x="50" y="10" text-anchor="middle" alignment-baseline="middle" stroke="none" fill="black">diff</text>
+    </g>
+  </g>
+</svg>
