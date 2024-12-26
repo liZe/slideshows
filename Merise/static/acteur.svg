@@ -69,7 +69,7 @@
        y="126.24926" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:125%;font-family:Cantarell;-inkscape-font-specification:Cantarell;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:125%;font-family:Liberation Sans;-inkscape-font-specification:Liberation Sans;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="96.053825"
        y="135.90807"
        id="text840"><tspan
@@ -77,6 +77,6 @@
          id="tspan838"
          x="96.053825"
          y="135.90807"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;font-family:Cantarell;-inkscape-font-specification:Cantarell;stroke-width:0.26458332px">acheteur</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;font-family:Liberation Sans;-inkscape-font-specification:Liberation Sans;stroke-width:0.26458332px">acheteur</tspan></text>
   </g>
 </svg>
