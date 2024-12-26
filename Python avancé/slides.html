@@ -1,0 +1,729 @@
+<section>
+  <h1>Python avancé</h1>
+  <p><a href="https://yabz.fr/">Guillaume Ayoub</a> − 2024/2025</p>
+</section>
+<section>
+  <ol>
+    <li>Rappels</li>
+    <li>Imports et modules</li>
+    <li>Environnements virtuels</li>
+    <li>Distribution de paquets</li>
+    <li>Programmation objet</li>
+    <li>Tests</li>
+    <li>Décorateurs</li>
+    <li>Asynchronisme</li>
+    <li>Annotations</li>
+    <li>Communauté</li>
+  </ol>
+</section>
+
+<section>
+  <h2>Rappels</h2>
+</section>
+<section>
+  <h3>Syntaxe</h3>
+  <pre><code class="python hljs">
+numbers = (1, 2, 3)
+
+def double(number):
+    return number * 2
+
+for i in numbers:
+    print(double(i))
+  </code></pre>
+</section>
+<section>
+  <h3>Langage</h3>
+  <p>Python est un <strong>langage généralement interprété,</strong> avec un <strong>typage fort et dynamique,</strong> dont la mémoire est gérée par un ramasse-miettes. Sa syntaxe est connue pour être <strong>basée sur l’indentation.</strong></p>
+  <p>C’est un <strong>langage généraliste</strong> connu pour sa <strong>simplicité.</strong> Il est parmi les langages les plus populaires et les plus utilisés, il est disponible sur une très large variété de plateformes.</p>
+</section>
+<section>
+  <h3>Types de base</h3>
+  <ul>
+    <li>Numériques : <code>int</code>, <code>float</code>…</li>
+    <li>Séquences : <code>list</code>, <code>tuple</code>, <code>range</code>…</li>
+    <li>Chaînes : <code>str</code>, <code>bytes</code>…</li>
+    <li>Tableaux de correspondance : <code>dict</code>…</li>
+  </ul>
+</section>
+<section>
+  <h3>Contrôle de flux</h3>
+  <ul>
+    <li>Tests binaires : <code>if</code>, <code>elif</code>, <code>else</code></li>
+    <li>Boucles : <code>for</code>, <code>while</code>, <code>break</code>, <code>continue</code></li>
+    <li>Filtrage : <code>match</code>, <code>case</code></li>
+    <li>Fonctions : <code>def</code>, <code>return</code>, <code>yield</code></li>
+    <li>Exceptions : <code>try</code>, <code>raise</code>, <code>except</code>, <code>finally</code></li>
+  </ul>
+</section>
+<section>
+  <h3>Opérateurs</h3>
+  <ul>
+    <li>Assignation : <code>=</code></li>
+    <li>comparaison : <code>==</code>, <code>is</code>, <code>in</code>, <code>&lt;</code>, <code>></code>, <code>&lt;=</code>, <code>>=</code>, <code>!=</code></li>
+    <li>Arithmétique : <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>//</code>, <code>%</code>, <code>**</code></li>
+    <li>Booléen : <code>and</code>, <code>or</code>, <code>not</code></li>
+    <li>Binaire : <code>&amp;</code>, <code>|</code>, <code>^</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code></li>
+  </ul>
+</section>
+
+<section>
+  <h2>Imports et modules</h2>
+</section>
+<section>
+  <h3>Fichiers et dossiers</h3>
+  <p><strong>Les fichiers et les dossiers peuvent être importés</strong> depuis d’autres fichiers.</p>
+  <p>Les variables définies au niveau du module sont accessibles comme attributs.</p>
+  <p>Les imports peuvent être <strong>absolus</strong> pour les modules globaux, ou <strong>relatifs</strong> pour les fichiers locaux.</p>
+</section>
+<section>
+  <h3>Imports absolus</h3>
+  <pre><code class="python hljs">
+import os
+print(os.name)
+  </code></pre>
+
+  <pre><code class="python hljs">
+import os.path
+print(os.path.devnull)
+  </code></pre>
+
+  <pre><code class="python hljs">
+from os import path
+print(path.devnull)
+  </code></pre>
+</section>
+<section>
+  <h3>Imports relatifs</h3>
+  <pre><code class="python hljs">
+from . import abc  # import abc.py in the same package
+print(abc.xxx)
+  </code></pre>
+
+  <pre><code class="python hljs">
+from .. import def  # import def.py in the parent package
+print(def.xxx)
+  </code></pre>
+
+  <pre><code class="python hljs">
+from ..ghi import jkl  # import ghi/jkl.py in the parent package
+print(jkl.xxx)
+  </code></pre>
+</section>
+<section>
+  <h3>Fichier <code>__init__.py</code></h3>
+  <p>Le fichier <code>__init__.py</code> est le fichier qui est importé lorsque son dossier parent est importé. Il est obligatoire pour qu’un dossier soit un paquet régulier.</p>
+</section>
+
+<section>
+  <h2>Environnements virtuels</h2>
+</section>
+<section>
+  <h3>Le problème de l’installation globale</h3>
+  <p>On veut pouvoir installer des programmes utilisant des versions précises de Python et des modules externes.</p>
+  <p>Par défaut, l’installation de ces paquets se fait au niveau du système. Python permet également à chaque personne d’installer des modules uniquement pour elle.</p>
+</section>
+<section>
+  <h3>Les environnements virtuels</h3>
+  <p><strong>Les environnements virtuels permettent de créer des sous-systèmes indépendants,</strong> avec leur interpréteur et leurs modules accessibles uniquement depuis l’environnement.</p>
+</section>
+<section>
+  <h3>Le module <code>venv</code></h3>
+  <p>Python propose le module <a href="https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#creating-a-virtual-environment"><code>venv</code></a> pour créer des environnements virtuels. Ce module est dans la bibliothèque standard.</p>
+  <p>Il existe également de nombreux outils externes permettant d’utiliser les environnements virtuels, comme <a href="https://docs.astral.sh/uv/">uv</a>, <a href="https://pipenv.pypa.io/en/latest/">Pipenv</a> ou <a href="https://python-poetry.org/">Poetry</a>.</p>
+</section>
+<section>
+  <h3>Informations à savoir</h3>
+  <ul>
+    <li>Toutes les informations concernant l’environnement virtuel sont dans le dossier.</li>
+    <li>Les modules installés dans l’environnement ne sont pas accessibles de l’extérieur.</li>
+    <li>Les environnements virtuels sont dépendants du système. <strong>On ne les versionne jamais.</strong></li>
+  </ul>
+</section>
+<section>
+  <h3>Exemple (Unix/macOS)</h3>
+  <pre><code class="bash hljs">
+$ python -m venv env
+$ source env/bin/activate
+(env) $ which python
+(env) $ pip install …
+(env) $ deactivate
+$ which python
+  </code></pre>
+</section>
+<section>
+  <h3>Exemple (Windows)</h3>
+  <pre><code class="sh hljs">
+> python -m venv env
+> .\env\Scripts\activate
+(env) > where python
+(env) > pip install …
+(env) > deactivate
+> where python
+  </code></pre>
+</section>
+
+<section>
+  <h2>Distribution de paquets</h2>
+</section>
+<section>
+  <h3>Bibliothèques</h3>
+  <p>
+    Certaines bibliothèques sont très largement utilisées, et quelques unes
+    sont même considérées comme des standards.
+  </p>
+  <p>
+    <strong>Flask et Django</strong> sont les <em>frameworks</em> les plus
+    utilisés pour le web, et <strong>FastAPI</strong> pour les API. Côté
+    client, on utilise <strong>Requests</strong> pour effectuer des requêtes
+    HTTP.
+  </p>
+  <p>
+    Dans le monde scientifique, des outils sont extrêmement répandus, parmi lesquels
+    <strong>Jupyter, NumPy, SciPy, Pandas, Matplotlib, SciKit-Learn et TensorFlow.</strong>
+  </p>
+  <p>
+    Enfin, les bibliothèques utilisées pour le <em>packaging</em> sont très
+    populaires : <strong>Pip, Setuptools, Wheel et Pipenv</strong> sont parmi les
+    modules externes les plus téléchargés sur PyPI. D’autres outils comme
+    <strong>SQLAlchemy, Pytest et Pillow</strong> sont également très utilisés.
+  </p>
+</section>
+<section>
+  <h3>PyPI</h3>
+  <p>
+    <a href="https://pypi.org/">L’index des paquets Python (PyPI)</a> est le
+    site qui référence les paquets Python distribués et publiquement
+    accessibles.
+  </p>
+</section>
+<section>
+  <h3>Installation de paquets</h3>
+  <p>
+    L’installation de paquets se fait avec l’outil <code>pip</code> fourni avec
+    Python.
+  </p>
+  <p>
+    <code>pip</code> est entre autres capable d’installer les paquets depuis
+    PyPI, depuis un autre site compatible, depuis un dossier local ou depuis un
+    dépôt git.
+  </p>
+</section>
+<section>
+  <h3>Création de paquets</h3>
+  <p>
+    La création de paquets Python a connu
+    <a href="https://www.stella.coop/blog/00003-l-enfer-des-paquets-python-le-sac-de-noeuds">une histoire houleuse</a>,
+    mais aujourd’hui
+    <a href="https://packaging.python.org/">des solutions officielles simples</a> sont proposées par la
+    <a href="https://www.pypa.io/en/latest/">la <em>Python Packaging Authority</em> (PyPA)</a>.
+  </p>
+  <p>
+    Pour la grande majorité des paquets, on peut utiliser un fichier <code>pyproject.toml</code>
+    contenant toutes les informations du paquet.
+  </p>
+</section>
+
+<section>
+  <h2>Programmation objet</h2>
+</section>
+<section>
+  <h3>Définition de classes</h3>
+  <pre><code class="python hljs">
+class Animal:
+    """Representation of an animal."""
+    def __init__(self, name):
+        self.name = name
+
+    def say_hello(self):
+       """Print a little presentation of the animal."""
+        print(f"Hello! My name is {self.name}.")
+
+tweety = Animal("Tweety")
+tweety.say_hello()
+  </code></pre>
+</section>
+<section>
+  <h3>Méthodes</h3>
+  <p>
+    <strong>Les méthodes sont définies de la même manière que les fonctions,</strong>
+    mais dans le bloc de la classe.
+  </p>
+  <p>
+    <strong>Le premier paramètre est habituellement nommé <code class="python">self</code></strong>
+    et correspond à l’instance de la classe.
+  </p>
+  <p>
+    Certaines méthodes sont dites « spéciales », comme par
+    exemple <code class="python">__init__</code> qui est appelée lors de l’instanciation de la
+    classe.
+  </p>
+</section>
+<section>
+  <h3>Attributs</h3>
+  <p>
+    <strong>Les attributs de n’importe quel type peuvent être ajoutés sur les instances</strong>
+    à la création et durant toute la vie de l’objet.
+  </p>
+  <p>
+    Les attributs sont par défaut publics. Il est possible de créer des
+    attributs protégés, mais avant tout pour éviter les accidents.
+  </p>
+  <p>
+    Une instance peut également avoir des attributs spéciaux.
+  </p>
+</section>
+<section>
+  <h3>Héritage</h3>
+  <pre><code class="python hljs">
+class Duck(Animal):
+    """Representation of a duck."""
+    def say_hello(self):
+        print(f"I'm a duck, my name is {self.name}.")
+
+daffy = Duck("Daffy")
+daffy.say_hello()
+  </code></pre>
+  <p>
+    Les méthodes redéfinies écrasent les méthodes de la classe dont on hérite.
+  </p>
+  <p>
+    Python inclut la possibilité de faire de l’héritage multiple.
+  </p>
+</section>
+<section>
+  <h3>Appel de méthodes parentes</h3>
+  <pre><code class="python hljs">
+class Bunny(Animal):
+    """Representation of a bunny."""
+    def say_hello(self):
+        super().say_hello()
+        print("I’m a bunny.")
+
+bugs = Bunny("Bugs")
+bugs.say_hello()
+  </code></pre>
+  <p>
+    La fonction <code>super</code> retourne un objet dont les méthodes sont
+    celles de la classe parente la plus proche possédant cette méthode.
+  </p>
+</section>
+
+<section>
+  <h2>Tests</h2>
+</section>
+<section>
+  <h3>Tests unitaires et fonctionnels</h3>
+  <p>
+    Python propose un ensemble assez large de solutions pour effectuer des
+    tests unitaires et fonctionnels.
+  </p>
+</section>
+<section>
+  <h3>Bibliothèque standard</h3>
+  <p>
+    La bibliothèque standard de Python propose deux modules pour effectuer des
+    tests unitaires.
+  </p>
+  <p>
+    <a href="https://docs.python.org/3/library/unittest.html"><code>unittest</code></a>
+    est un module permettant de définir des tests dans des fichiers à côté du
+    code, sous forme de classes et de méthodes.
+  </p>
+  <p>
+    <a href="https://docs.python.org/3/library/doctest.html"><code>doctest</code></a>
+    est un module permettant d’inclure des tests courts directement dans les <em>docstrings</em> du programme à tester.
+  </p>
+</section>
+<section>
+  <h3>Pytest</h3>
+  <p>
+    <strong><a href="https://docs.pytest.org/">pytest</a> est le <em>framework</em> de tests le plus utilisé pour les projets Python.</strong>
+  </p>
+  <p>
+    Il propose de nombreuses fonctionnalités comme la découverte automatique de
+    tests, l’affichage d’informations avancées pour les erreurs, les tests
+    paramétriques…
+  </p>
+  <p>
+    De nombreux plugins sont également utilisables avec Pytest.
+  </p>
+</section>
+<section>
+  <h3>Couverture de tests</h3>
+  <p>
+    Il est possible de vérifier la couverture de tests avec l’outil
+    <a href="https://coverage.readthedocs.io/">Coverage.py</a>.
+  </p>
+  <p>
+    On peut grâce à ce module vérifier le pourcentage de lignes et de branches
+    testées, et lister le cas échéant les lignes qui n’ont pas été exécutées
+    lors des tests.
+  </p>
+</section>
+<section>
+  <h3>Autres outils concernant la qualité</h3>
+  <p>
+    Au-delà des tests, d’autres outils sont disponibles pour assurer et
+    vérifier la qualité du code Python.
+  </p>
+  <p>
+    Parmi tous ces outils, on notera
+    <strong><a href="https://docs.astral.sh/ruff/">Ruff</a>, un outil qui formate automatiquement le code</strong>
+    sans en changer son fonctionnement. Il est utilisé par de nombreux projets,
+    et représente une solution rapide, simple et pratique pour obtenir du code
+    qui respecte (visuellement) les bonnes pratiques de la communauté Python.
+  </p>
+</section>
+
+<section>
+  <h2>Décorateurs</h2>
+</section>
+<section>
+  <h3>Définition</h3>
+  <p>
+    <strong>
+      Un décorateur est une fonction qui prend en paramètre une seconde
+      fonction et qui renvoie une troisième fonction.
+    </strong>
+  </p>
+  <p>
+    La fonction renvoyée a généralement pour but d’appeler la fonction passée
+    en paramètre, d’en modifier le résultat ou la signature, ou de faire
+    certaines opérations avant ou après l’appel.
+  </p>
+</section>
+<section>
+  <h3>Exemple</h3>
+  <pre><code class="python hljs">
+def report(function):
+    def new_function(*args, **kwargs):
+        print(f"Calling function {function.__name__}")
+        result = function(*args, **kwargs)
+        print(f"Result: {result}")
+        return result
+    return new_function
+
+@report
+def add(a, b):
+    return a + b
+  </code></pre>
+</section>
+<section>
+  <h3>Utilité</h3>
+  <p>
+    <strong>Les décorateurs sont très utiles lorsque l’on veut qu’un groupe de fonctions se comportent de la même manière,</strong>
+    sans avoir à répéter le même code dans chacune d’entre elles.
+  </p>
+  <p>
+    Ils sont également utilisés pour enregistrer des fonctions dans une liste
+    ou un dictionnaire, comme par exemple dans les <em>frameworks</em> web pour
+    associer les URL aux fonctions.
+  </p>
+  <p>
+    L’adaptabilité des décorateurs en fait des outils puissants dans de
+    nombreux domaines très variés : cache, sécurité, vérification, gestion
+    d’exceptions, paramétrage…
+  </p>
+</section>
+<section>
+  <h3>Dans la bibliothèque standard</h3>
+  <p>
+    <strong>La bibliothèque standard propose des décorateurs</strong> communément utilisés :
+  </p>
+  <ul>
+    <li><code>functools.cache</code> garde en mémoire le résultat d’une fonction selon ses paramètres,</li>
+    <li><code>functools.partial</code> définit des paramètres par défaut à une fonction,</li>
+    <li><code>functools.wraps</code> récupère certains attributs d’une fonction et les applique à une autre fonction,</li>
+    <li><code>staticmethod</code> et <code>classmethod</code> permettent de définir des méthodes statiques ou des méthodes de classe,</li>
+    <li><code>property</code> transforme une méthode en attribut…</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Asynchronisme</h2>
+</section>
+<section>
+  <h3>Programmation concurrente</h3>
+  <p>
+    En programmation, il existe différentes solutions pour effectuer des
+    opérations en même temps. Les solutions classiques utilisées sont :
+  </p>
+  <ul>
+    <li>
+      <strong>Le <em>multiprocessing</em> permet de lancer plusieurs tâches dans plusieurs processus isolés,</strong>
+      tournant potentiellement sur plusieurs cœurs du processeur. Il est
+      pratique pour les tâches indépendantes qui n’ont pas à échanger de
+      données.
+    </li>
+    <li>
+      <strong>Le <em>multithreading</em> permet de lancer plusieurs tâches dans le même processus sur le même cœur du processeur,</strong>
+      et laisse l’OS répartir le temps de calcul entre ces tâches. Il est
+      pratique pour les tâches partageant des données.
+    </li>
+  </ul>
+</section>
+<section>
+  <h3>Limites du <em>multithreading</em> en Python</h3>
+  <p>
+    <strong>CPython utilise un verrou global, le GIL,</strong>
+    qui est verrouillé à chaque fois qu’un <em>thread</em> est exécuté. Aucune
+    autre partie du code en C ne peut exécuter du Python si le GIL n’est pas
+    déverrouillé.
+  </p>
+  <p>
+    Cela signifie concrètement que
+    <strong>deux <em>threads</em> Python ne peuvent pas de manière efficace exécuter du code concurrent dans le même processus.</strong>
+  </p>
+  <p>
+    Un <em>thread</em> peut rendre le GIL volontairement au bout d’un moment,
+    ou l’interpréteur peut suspendre le <em>thread</em> et déverrouiller le GIL
+    lui-même pour donner du temps aux autres <em>threads</em>. C’est ce qu’on
+    appelle du <em>multitasking</em> préemptif.
+  </p>
+  <p>
+    Depuis Python 3.13, une version expérimentale sans GIL est disponible. Elle
+    a pour vocation de devenir la version par défaut dans un avenir
+    relativement lointain, lorsque les bibliothèques externes principales
+    auront été testées et corrigées.
+  </p>
+</section>
+<section>
+  <h3>Coroutines</h3>
+  <p>
+    Pour passer outre cette limitation,
+    <strong>un autre système plus léger et plus adapté a été développé : les coroutines.</strong>
+  </p>
+  <p>
+    Les coroutines fonctionnent comme les <em>threads</em> mais sont gérées
+    directement par l’interpréteur et non par le système d’exploitation. De
+    plus, elles proposent une interface pour gérer manuellement le changement
+    de contexte, et laisser l’accès au processeur à d’autres <em>threads</em> à
+    des moments opportuns.
+  </p>
+  <p>
+    Les coroutines sont donc généralement plus légères et plus performantes que
+    les <em>threads</em> en Python.
+  </p>
+</section>
+<section>
+  <h3>Cas d’usage des coroutines</h3>
+  <p>
+    Les coroutines s’effectuant sur le même cœur,
+    <strong>leur code ne s’effectue pas en parallèle au même moment, mais bien de manière séquentielle.</strong>
+    Elles ne sont donc pas utiles lorsque les tâches effectuées utilisent
+    beaucoup le processeur.
+  </p>
+  <p>
+    Au contraire, lorsque les tâches effectuées sont souvent en attente sur des
+    entrées/sorties (réseau, disque…), le fait de pouvoir manuellement redonner
+    la main à l’interpréteur peut grandement améliorer les performances.
+  </p>
+</section>
+<section>
+  <h3>Exemple de code synchrone</h3>
+  <pre style="font-size: 0.7em; line-height: 1"><code class="python hljs">
+from time import sleep, time
+
+def serve_coffee():
+    print("Serving coffee…")
+    sleep(1)  # Go to coffee machine
+    sleep(3)  # Put coffee in machine
+    sleep(8)  # Wait for coffee to be ready
+    sleep(1)  # Bring back coffee
+    print("Coffee served!")
+
+def serve_cake():
+    print("Serving cake…")
+    sleep(1)  # Go to cake
+    sleep(3)  # Put cake in bag
+    sleep(1)  # Bring back cake
+    print("Cake served!")
+
+def serve_breakfast():
+    print("Serving!")
+    before = time()
+    serve_coffee()
+    serve_cake()
+    print(f"Finished in {time() - before : .2f}s")
+
+serve_breakfast()
+  </code></pre>
+</section>
+<section>
+  <h3>Exemple de code asynchrone</h3>
+  <pre style="font-size: 0.7em; line-height: 1"><code class="python hljs">
+from asyncio import gather, run, sleep as async_sleep
+from time import sleep, time
+
+async def serve_coffee():
+    print("Serving coffee…")
+    sleep(1)  # Go to coffee machine
+    sleep(3)  # Put coffee in machine
+    await async_sleep(8)  # Wait for the coffee to be served
+    sleep(1)  # Bring back coffee
+    print("Coffee served!")
+
+async def serve_cake():
+    print("Serving cake…")
+    sleep(1)  # Go to cake
+    sleep(3)  # Put cake in bag
+    sleep(1)  # Bring back cake
+    print("Cake served!")
+
+async def serve_breakfast():
+    print("Serving!")
+    before = time()
+    await gather(serve_coffee(), serve_cake())
+    print(f"Finished in {time() - before : .2f}s")
+
+run(serve_breakfast())
+  </code></pre>
+</section>
+
+<section>
+  <h2>Annotations</h2>
+</section>
+<section>
+  <h3>Typage statique</h3>
+  <p>
+    Python permet de
+    <strong>donner des indications sur le type</strong>
+    des arguments et de la valeur de retour des fonctions.
+    <strong>Ces <a href="https://docs.python.org/3/library/typing.html">annotations</a> sont purement indicatives</strong>
+    avec l’interpréteur par défaut, mais peuvent aider pour la lisibilité et la
+    documentation.
+  </p>
+</section>
+<section>
+  <h3>Exemple</h3>
+  <pre><code class="python hljs">
+class BankAccount:
+    def __init__(self, initial_balance: int = 0) -> None:
+        self.balance = initial_balance
+
+    def deposit(self, amount: int) -> None:
+        self.balance += amount
+
+    def withdraw(self, amount: int) -> None:
+        self.balance -= amount
+
+    def is_overdrawn(self) -> bool:
+        return self.balance < 0
+  </code></pre>
+</section>
+<section>
+  <h3>Vérification statique de types</h3>
+  <p>
+    <strong>Les annotations peuvent être utilisées par des programmes comme <a href="http://mypy-lang.org/">Mypy</a></strong>
+    pour vérifier les types de manière statique.
+  </p>
+  <p>
+    Mypy est un outil très puissant permettant de vérifier la cohérence des
+    types pour une grande variété de cas. Intégré à un IDE, il donne également
+    une aide considérable pour l’autocomplétion.
+  </p>
+</section>
+<section>
+  <h3>Limitations</h3>
+  <p>
+    <strong>Python reste fondamentalement un langage typé dynamiquement</strong>
+    et tous les cas ne peuvent pas être correctement gérés par les outils
+    vérifiant les annotations. Les garanties offertes par la vérification
+    statique ne sont pas aussi solides que dans des langages typés statiquement
+    comme C++, Java ou Rust.
+  </p>
+</section>
+
+<section>
+  <h2>Communauté</h2>
+</section>
+<section>
+  <h3>Utilisations</h3>
+  <p>
+    Python est actuellement
+    <a href="https://github.blog/news-insights/octoverse/octoverse-2024/">le langage le plus populaire sur GitHub</a> et
+    <a href="https://insights.stackoverflow.com/trends?tags=java%2Cc%2Cc%2B%2B%2Cpython%2Cc%23%2Cjavascript%2Cphp%2Crust">le langage dont on discute le plus sur StackOverflow</a>.
+  </p>
+  <p>
+    Certains sites et outils majeurs utilisent massivement Python pour tout ou
+    partie de leur code. On notera en particulier Netflix, Instagram, ChatGPT,
+    Reddit, YouTube, Dropbox…
+  </p>
+</section>
+<section>
+  <h3>Bonnes pratiques</h3>
+  <p>
+    Python est un langage dont les conventions sont très largement
+    homogènes. Ne pas suivre ces conventions est considéré comme une grande
+    source de frustration et de rejet de la part de la communauté 😠.
+  </p>
+  <p>
+    Lire du code récent (pas celui de la bibliothèque standard !) est la
+    meilleure manière de progresser.
+  </p>
+</section>
+<section>
+  <h3>Python Enhancement Proposals</h3>
+  <p>
+    Les commentaires et propositions d’améliorations sont centraliséses dans
+    des documents communément appelés « PEP ».
+  </p>
+  <p>
+    Certaines sont très largement suivies, comme les
+    <a href="https://www.python.org/dev/peps/pep-0008/">PEP 8</a> (guide de style),
+    <a href="https://www.python.org/dev/peps/pep-0020/">PEP 20</a> (zen de Python) et
+    <a href="https://www.python.org/dev/peps/pep-0257/">PEP 257</a> (conventions sur la documentation).
+  </p>
+</section>
+<section>
+  <h3>Gouvernance</h3>
+  <p>
+    Python a longtemps été géré par son créateur Guido van Rossum, qui s’est
+    lui-même désigné <em>benevolent dictator for life</em>. Le BDFL avait pour
+    principale mission de valider ou de refuser les PEP préalablement soumises
+    au vote.
+  </p>
+  <p>
+    À la suite de la PEP 572, Guido van Rossum a annoncé le 12 juillet 2018
+    vouloir renoncer à ce rôle. Il a annoncé qu’il ne nommerait pas de
+    successeur et que la communauté devait décider du fonctionnement futur.
+  </p>
+  <p>
+    Des PEP ont été soumises au vote pour désigner le nouveau mode de
+    gouvernance. En décembre 2018 a été annoncé un conseil de 5 personnes
+    chargées de reprendre dans les grandes lignes les missions du BDFL, en
+    particulier l’acceptation de PEP.
+  </p>
+</section>
+<section>
+  <h3>Communauté</h3>
+  <p>
+    Python est soutenu par la Python Software Foundation, qui a pour mission
+    d’accompagner les projets <em>open source</em> utilisant le langage.
+  </p>
+  <p>
+    <strong>La communauté Python est connue pour être particulièrement bienveillante et ouverte.</strong>
+    Un <a href="https://www.python.org/psf/codeofconduct/">code de conduite</a>
+    a été mis en place en 2013 pour affirmer publiquement les valeurs de ses
+    membres.
+  </p>
+  <p>
+    Dans le monde francophone 🇫🇷,
+    <a href="https://afpy.org/">l’Association Francophone Python</a>
+    organise régulièrement des rencontres entre utilisateurs de tous niveaux
+    (<a href="https://www.meetup.com/fr-FR/Python-AFPY-Lyon/">dont certaines à Lyon</a>).
+    Une conférence gratuite, <a href="https://www.pycon.fr/">PyConFr</a>, se tient
+    chaque année dans une ville différente.
+  </p>
+</section>
+<section>
+  <h3>Liens utiles</h3>
+  <ul>
+    <li><a href="https://realpython.com/">Real Python</a> : tutoriels et formations</li>
+    <li><a href="https://pyvideo.org/">PyVideo</a> : vidéos autour du langage</li>
+    <li><a href="https://talkpython.fm/home">Talk Python to Me</a> et <a href="https://pythonbytes.fm/">PythonBytes</a> : podcasts</li>
+    <li><a href="https://www.hackinscience.org/">Hackinscience</a> : une plateforme interactive d’exercices en Python</li>
+    <li><a href="https://py-rates.fr/">Pyrates</a> : un jeu pour apprendre Python</li>
+  </ul>
+</section>

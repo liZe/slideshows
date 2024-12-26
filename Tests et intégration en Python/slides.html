@@ -1,0 +1,676 @@
+<section>
+  <h1>Tests et intégration en Python</h1>
+  <p><a href="https://yabz.fr/">Guillaume Ayoub</a> − 2024/2025</p>
+</section><section>
+  <img src="static/ariane.jpg" title="Photo de l’explosion du vol 501 d’Ariane 5" alt="Photo de l’explosion du vol 501 d’Ariane 5">
+</section><section>
+  <ol>
+    <li>Quelques rappels de Python</li>
+    <li>Objectifs et variété</li>
+    <li>Qualité et cycle de vie</li>
+    <li>Outils de test dans la bibliothèque standard</li>
+    <li>Pytest</li>
+    <li>Pour aller plus loin</li>
+  </ol>
+</section><section>
+  <h2>Quelques rappels de Python</h2>
+</section><section>
+  <h3>Syntaxe</h3>
+  <pre><code class="python hljs">
+numbers = (1, 2, 3)
+
+def double(number):
+    return number * 2
+
+for i in numbers:
+    print(double(i))
+  </code></pre>
+</section><section>
+  <h3>Conditions</h3>
+  <p>
+    Les blocs de test de conditions se font avec les mots
+    clés <code class="python">if</code>, <code class="python">else</code> et <code class="python">elif</code>.
+  </p>
+  <pre><code class="python hljs">
+a = 2
+
+if a == 0:
+    print("zero")
+elif a == 1:
+    print("one")
+else:
+    print("two or more")
+  </code></pre>
+</section><section>
+  <h3>Boucles</h3>
+  <p>
+    Les mots réservés <code class="python">for</code> et <code class="python">while</code> permettent de
+    construire des boucles.
+  </p>
+  <pre><code class="python hljs">
+for a in (1, 2, 3):
+    print(a)
+
+while a > 0:
+    print(a)
+    a = a - 1
+  </code></pre>
+</section><section>
+  <h3>Listes et n-uplets</h3>
+  <p>
+    Python propose deux types principaux pour les tableaux d’éléments : les
+    listes (<code class="python">list</code>) et les n-uplets (<code class="python">tuple</code>).
+  </p>
+  <pre><code class="python hljs">
+new_list = ["a", "b", 2]
+new_tuple = ("a", "b", 2)
+new_list.append(7)
+print(new_list[1])
+print(new_list)
+  </code></pre>
+  <p>
+    Les deux types sont très similaires. La principale différence est que <strong>les
+    listes sont modifiables, contrairement aux tuples.</strong>
+  </p>
+</section><section>
+  <h3>Dictionnaires</h3>
+  <p>
+    Les dictionnaires (<code class="python">dict</code>) permettent d’associer des valeurs à
+    des clés.
+  </p>
+  <pre><code class="python hljs">
+fruit_color = {"banana": "yellow", "kiwi": "green"}
+fruit_color["mango"] = "orange"
+print(fruit_color["mango"])
+print(fruit_color)
+  </code></pre>
+  <p>
+    Les dictionnaires sont les objets les plus utilisés dans le fonctionnement
+    interne de Python. Ils sont très compacts et très rapides.
+  </p>
+  <p>
+    Les clés des dictionnaires sont ordonnées.
+  </p>
+</section><section>
+  <h3>Fonctions</h3>
+  <pre><code class="python hljs">
+def double(number):
+    """Return given number multiplied by two."""
+    return number * 2
+
+print(double(21))
+  </code></pre>
+</section><section>
+  <h3>Les environnements virtuels</h3>
+  <p>
+    <strong>Les environnements virtuels permettent de créer des sous-systèmes indépendants,</strong>
+    avec leur interpréteur et leurs modules accessibles uniquement depuis
+    l’environnement.
+  </p>
+</section><section>
+  <h3>Le module <code>venv</code></h3>
+  <p>
+    <strong>Python propose le module <a href="https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#creating-a-virtual-environment"><code>venv</code></a> pour créer des environnements virtuels.</strong>
+    Ce module est dans la bibliothèque standard.
+  </p>
+  <p>
+    Il existe également de nombreux outils externes permettant d’utiliser les
+    environnements virtuels, comme
+    <a href="https://pipenv.pypa.io/en/latest/">Pipenv</a>,
+    <a href="https://python-poetry.org/">Poetry</a> ou
+    <a href="https://docs.astral.sh/uv/">uv</a>.
+  </p>
+</section><section>
+  <h3>Informations à savoir</h3>
+  <ul>
+    <li><strong>Toutes les informations concernant l’environnement virtuel sont dans le dossier.</strong></li>
+    <li>Les modules installés dans l’environnement ne sont pas accessibles de l’extérieur.</li>
+    <li>Les environnements virtuels sont dépendants du système. On ne les versionne pas.</li>
+  </ul>
+</section><section>
+  <h2>Objectifs et variété</h2>
+</section><section>
+  <h3>Objectifs des tests</h3>
+  <p>
+    En informatique, la nature et la fonction des tests sont très variées.
+    Selon le projet, <strong>on peut être amené à tester de nombreuses facettes
+    différentes d’un programme,</strong> en utilisant différents outils.
+  </p>
+</section><section>
+  <h3>Propriété testée</h3>
+  <p>
+    Un test peut évaluer un ou plusieurs éléments différents d’un projet
+    informatique. <strong>L’indicateur le plus communément testé est la capacité
+    fonctionnelle,</strong> c’est-à-dire la capacité d’un programme à répondre
+    aux exigeances attendues.
+  </p>
+  <p>
+    Mais il en existe de nombreux autres :
+  </p>
+  <ul>
+    <li>la fiabilité,</li>
+    <li>la performance,</li>
+    <li>la sécurité,</li>
+    <li>la portabilité…</li>
+  </ul>
+</section><section>
+  <h3>Nature de l’élément testé</h3>
+  <p>
+    Selon l’échelle de l’élément de code testé, on distingue plusieurs niveaux
+    de tests :
+  </p>
+  <ul>
+    <li>les <strong>tests unitaires</strong> testent des fonctions atomiques,</li>
+    <li>les <strong>tests d’intégration</strong> testent des assemblages de fonctions atomiques,</li>
+    <li>les <strong>tests système</strong> (tests fonctionnels) testent l’ensemble du projet sur un système complet,</li>
+    <li>les <strong>tests d’acceptation</strong> (recette) testent l’ensemble du projet en conditions d’utilisation réelles.</li>
+  </ul>
+</section><section>
+  <h3>Accessibilité de l’élément testé</h3>
+  <p>
+    L’élément testé peut l’être avec ou sans connaissance du fonctionnement
+    interne de cet élément. Ainsi, on distinguera :
+  </p>
+  <ul>
+    <li>les <strong>tests par boîte blanche</strong> <em>(white-box testing)</em> sont réalisés avec la connaissance du fonctionnement interne de l’élément testé,</li>
+    <li>les <strong>tests par boîte noire</strong> <em>(black-box testing)</em> sont réalisés avec la seule connaissance des entrées et des sorties de l’élément testé.</li>
+  </ul>
+  <p>
+    <strong>Les deux types de tests sont souvent complémentaires</strong> et
+    permettent de détecter des dysfonctionnements différents.
+  </p>
+  <p>
+    On réalise généralement des tests par boîte blanche sur les éléments les
+    plus petits (tests unitaires et d’intégration), et par boîte noire sur les
+    éléments complets (tests système et d’acceptation).
+  </p>
+</section><section>
+  <h2>Qualité et cycle de vie</h2>
+</section><section>
+  <h3>Qualité logicielle</h3>
+  <p>
+    Les tests font partie d’un ensemble de pratiques visant à
+    <strong>assurer un niveau de qualité sur un logiciel.</strong>
+  </p>
+</section><section>
+  <h3>Métriques</h3>
+  <p>
+    Afin d’être améliorée,
+    <strong>la qualité nécessite une appréciation mesurable du logiciel.</strong>
+  </p>
+  <p>
+    Sur différents sujets, on peut par exemple mesurer :
+  </p>
+  <ul>
+    <li>le nombre de lignes de code dupliquées,</li>
+    <li>le taux de couverture des tests,</li>
+    <li>la complexité,</li>
+    <li>le suivi de règles de syntaxe et de bonnes pratiques <em>(linting)</em>,</li>
+    <li>la rapidité d’exécution,</li>
+    <li>le pourcentage de disponibilité…</li>
+  </ul>
+</section><section>
+  <h3>Tests et modèles d’organisation</h3>
+  <p>
+    <strong>Avec des systèmes de gestion classiques de projets historiques,</strong>
+    comme les modèles de développement en cascade ou en V,
+    <strong>les tests sont généralement réalisés à la fin du développement,</strong>
+    afin d’assurer que le code livré correspond aux attentes.
+  </p>
+  <p>
+    <strong>Le management agile change ce paradigme :</strong> si chaque
+    itération est utilisable en production,
+    <strong>le produit doit être testé au fur et à mesure du développement.</strong>
+  </p>
+</section><section>
+  <h3>Test-Driven Development</h3>
+  <p>
+    <strong>Le TDD est une méthode de développement consistant à écrire les tests d’un programme avant d’en écrire le code.</strong>
+  </p>
+  <p>
+    En suivant un ensemble de règles, il est alors possible de réaliser, par
+    itérations très courtes, un développement efficace et robuste.
+  </p>
+</section><section>
+  <h3>Tests et intégration continue</h3>
+  <p>
+    Dans une volonté de réaliser l’intégration du code d’un projet en continu,
+    <strong>les tests automatiques peuvent apporter une métrique suffisante</strong>
+    pour juger de l’utilisabilité d’une version en production.
+  </p>
+  <p>
+    Les forges logicielles, comme GitHub ou GitLab, proposent par exemple des
+    systèmes d’intégration et de déploiement continus, permettant de réaliser
+    ces opérations sans intervention humaine.
+  </p>
+</section><section>
+  <h2>Outils de test dans la bibliothèque standard</h2>
+</section><section>
+  <h3>Doctest</h3>
+  <p>
+    Le module
+    <strong><code>doctest</code> cherche des extraits de texte ressemblant à des sessions Python interactives</strong>
+    avant de les exécuter, de façon à vérifier que le fonctionnement correspond
+    exactement à la description.
+  </p>
+</section><section>
+  <h3>Exemple avec Doctest</h3>
+  <pre><code class="python hljs">
+def double(number):
+    """Return given number mulitplied by 2.
+
+    >>> double(2)
+    4
+    >>> double(2.4)
+    4.8
+    >>> double({'a': 'b'})
+    Traceback (most recent call last):
+        ...
+    TypeError: unsupported operand type(s) for *: 'dict' and 'int'
+
+    """
+    return number * 2
+  </code></pre>
+</section><section>
+  <h3>Résultat avec Doctest</h3>
+  <pre><code class="console hljs">
+user@laptop$ python -m doctest double.py -v
+Trying:
+    double(2)
+Expecting:
+    4
+ok
+[…]
+1 items passed all tests:
+   3 tests in double.double
+[…]
+3 passed and 0 failed.
+Test passed.
+  </code></pre>
+</section><section>
+  <h3>Unittest</h3>
+  <p>
+    Le <em>framework</em> de tests unitaires
+    <strong><code>unittest</code> était au départ inspiré par JUnit</strong>
+    et ressemble aux principaux <em>frameworks</em> de tests unitaires des
+    autres langages. <strong>Il gère l'automatisation des tests,</strong>
+    le partage de code pour la mise en place et la finalisation des tests,
+    l'agrégation de tests en collections, et l'indépendance des tests par
+    rapport au <em>framework</em> utilisé.
+  </p>
+</section><section>
+  <h3>Exemple avec Unittest</h3>
+  <pre><code class="python hljs">
+import unittest
+
+def double(number):
+    return number * 2
+
+class TestDouble(unittest.TestCase):
+    def test_integer(self):
+        self.assertEqual(double(2), 4)
+
+    def test_float(self):
+        self.assertEqual(double(2.4), 4.8)
+
+    def test_error(self):
+        self.assertRaises(TypeError, double, {'a': 'b'})
+  </code></pre>
+</section><section>
+  <h3>Résultat avec Unittest</h3>
+  <pre><code class="console hljs">
+user@laptop$ python -m unittest double.py -v
+test_error (double.TestDouble.test_error) ... ok
+test_float (double.TestDouble.test_float) ... ok
+test_integer (double.TestDouble.test_integer) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK
+  </code></pre>
+</section><section>
+  <h2>Pytest</h2>
+</section><section>
+  <h3>Introduction</h3>
+  <p>
+    Le framework <code>pytest</code> rend facile l’écriture de petits tests
+    lisibles, et peut évoluer pour écrire des tests fonctionnels complexes
+    d’applications et de bibliothèques.
+  </p>
+  <p>
+    Bien qu’en dehors de la bibliothèque standard,
+    <strong>Pytest est la bibliothèque la plus utilisée pour les tests en Python.</strong>
+  </p>
+</section><section>
+  <h3>Installation et utilisation (Unix)</h3>
+  <pre><code class="console hljs">
+user@laptop$ ls -a
+[…]  test_double.py
+user@laptop$ python -m venv .venv
+user@laptop$ source .venv/bin/activate
+(env)user@laptop$ pip3 install pytest
+[…]
+Successfully installed […] pytest-[…]
+(env)user@laptop$ python -m pytest --version
+pytest […]
+  </code></pre>
+</section><section>
+  <h3>Installation et utilisation (Windows)</h3>
+  <pre><code>
+C:\Users\user\project>dir
+[…]
+test_double.py
+C:\Users\user\project>python -m venv .venv
+C:\Users\user\project>.venv\Scripts\activate
+(env)C:\Users\user\project>pip3 install pytest
+[…]
+Successfully installed […] pytest-[…]
+(env)C:\Users\user\project>python -m pytest --version
+pytest […]
+  </code></pre>
+</section><section>
+  <h3>Premier programme</h3>
+  <pre><code class="python hljs">
+from pytest import raises
+
+def double(number):
+    return number * 2
+
+def test_integer():
+    assert double(2) == 4
+
+def test_float():
+    assert double(2.4) == 4.9
+
+def test_error():
+    with raises(TypeError):
+        double({'a': 'b'})
+  </code></pre>
+</section><section>
+  <h3>Résultat du premier programme</h3>
+  <pre><code class="console hljs">
+user@laptop$ python -m pytest
+======== test session starts ==========
+[…]
+collected 3 items
+
+test_double.py .F.               [100%]
+
+============= FAILURES ================
+____________ test_float _______________
+
+    def test_float():
+>       assert double(2.4) == 4.9
+E       assert 4.8 == 4.9
+E        +  where 4.8 = double(2.4)
+
+test_double.py:10: AssertionError
+======= short test summary info =======
+FAILED test_double.py::test_float - assert 4.8 == 4.9
+===== 1 failed, 2 passed in 0.01s =====
+  </code></pre>
+</section><section>
+  <h3>Options utiles</h3>
+  <pre><code class="console hljs">
+user@laptop$ python -m pytest -k float
+[…] collected 3 items / 2 deselected / 1 selected […]
+user@laptop$ python -m pytest -v
+[…] test_double.py::test_integer PASSED […]
+user@laptop$ python -m pytest -x
+[…] !!!! stopping after 1 failures !!!! […]
+  </code></pre>
+</section><section>
+  <h3>Débuggage</h3>
+  <pre><code class="console hljs">
+user@laptop$ python -m pytest --pdb
+[…]
+-> assert double(2.4) == 4.9
+(Pdb)
+[…]
+  </code></pre>
+</section><section>
+  <h3>Plugins</h3>
+  <p>
+    <strong>De nombreux plugins sont proposés avec Pytest.</strong> Parmi
+    <a href="https://pythontest.com/pytest/finding-top-pytest-plugins/">les plus utilisés</a>, on notera :
+  </p>
+  <ul>
+    <li><a href="https://github.com/pytest-dev/pytest-cov"><code>pytest-cov</code></a> pour la couverture,</li>
+    <li><a href="https://pytest-xdist.readthedocs.io/en/stable/"><code>pytest-xdist</code></a> pour l’exécution parallèle.</a></li>
+  </ul>
+</section><section>
+  <h3>Arborescence</h3>
+  <p>
+    <strong>Pour les projets plus importants,</strong>
+    en particulier lorsqu’ils sont packagés,
+    <strong>on doit mettre en place une arborescence plus structurée.</strong>
+  </p>
+  <p>
+    Il n’existe pas de consensus concernant les bonnes pratiques d’une telle
+    arborescence en Python. On pourra par exemple utiliser cette structure :
+  </p>
+  <pre>
+
+&lt;project>
+├╴pyproject.toml
+├╴&lt;project>
+│ ├╴__init__.py
+│ └╴code.py
+└╴tests
+  └╴test_code.py
+  </pre>
+</section><section>
+  <h3>Paramétrage</h3>
+  <p>
+    Le fichier <code>pyproject.toml</code> contient la configuration de Pytest
+    et d’autres outils. Par exemple :
+  </p>
+  <pre><code class="toml hljs">
+[tool.pytest.ini_options]
+addopts = "-v --cov"
+
+[tool.coverage.run]
+branch = true
+include = ["tests/*", "code/*"]
+  </code></pre>
+</section><section>
+  <h3>Fonctions de Pytest</h3>
+  <p>
+    <strong>Pytest fournit <a href="https://docs.pytest.org/en/stable/reference/reference.html#functions">un grand nombre de fonctions</a></strong> qui permettent
+    de tester une grande variété de cas. Par exemple :
+  </p>
+  <ul>
+    <li><code>approx</code> permet de tester que deux flottants sont approximativement égaux,</li>
+    <li><code>raises</code> permet de tester qu’une exception a été levée,</li>
+    <li><code>warns</code> permet de tester qu’un <em>warning</em> a été émis…</li>
+  </ul>
+</section><section>
+  <h3>Marqueurs</h3>
+  <p>
+    <strong>Avec Pytest, il est possible de décorer certains tests</strong>
+    pour leur affecter des <a href="https://docs.pytest.org/en/stable/reference/reference.html#marks">marqueurs</a>.
+    Ces marqueurs sont pratiques pour indiquer qu’un test :
+  </p>
+  <ul>
+    <li>échoue volontairement, avec <code>xfail</code>,</li>
+    <li>doit être ignoré, avec <code>skip</code>,</li>
+    <li>doit être lancé avec une liste de paramètres, avec <code>parametrize</code>…</li>
+  </ul>
+</section><section>
+  <h3>Paramétrisation</h3>
+  <p>
+    <strong>Il est possible d’effectuer un test avec plusieurs valeurs,</strong>
+    sans avoir à écrire le même test plusieurs fois.
+  </p>
+  <pre><code class="python hljs">
+import pytest
+
+@pytest.mark.parametrize("a, b, expected", [
+    (3, 5, 8),
+    (2, 4, 6),
+    ("a", "b", "ab")
+])
+def test_sum(a, b, expected):
+    assert a + b == expected
+  </code></pre>
+</section><section>
+  <h3>Couverture</h3>
+  <p>
+    <strong><code>pytest-cov</code> permet d’avoir des informations de couverture de code et de branches en sortie des tests.</strong>
+  </p>
+  <p>
+    Le module est très largement configurable pour affiner les métriques de
+    couverture, ignorer les lignes inutiles, définir le format de sortie…
+  </p>
+  <pre>
+
+---------- coverage: platform […] ----------------------
+Name                   Stmts   Miss Branch BrPart  Cover
+--------------------------------------------------------
+code/__init__.py           2      0      0      0   100%
+tests/test_double.py       9      0      2      0   100%
+--------------------------------------------------------
+TOTAL                     11      0      2      0   100%
+  </pre>
+</section><section>
+  <h3>Monkey patching et mocking</h3>
+  <p>
+    Comme beaucoup de langages dynamiques,
+    <strong>Python autorise le <em>monkey patching</em>,</strong>
+    c’est-à-dire le remplacement à la volée de certaines fonctions ou certains
+    modules.
+  </p>
+  <p>
+    Cette pratique, bien que potentiellement piégeuse, est couramment utilisée
+    pour simuler certaines fonctions lors de l’exécution de tests (on parle
+    alors de <em>mocking</em>), ou pour tracer l’exécution de certaines
+    fonctions.
+  </p>
+  <p>
+    On peut utiliser le <em>monkey patching</em> pour simuler des accès à une
+    base de données, au réseau, au disque…
+  </p>
+</section><section>
+  <h3>Exemple de monkey patching manuel</h3>
+  <p>
+    Python permet simplement d’appliquer des <em>monkey patchs</em>, par
+    exemple en remplaçant une fonction d’un module par une autre.
+  </p>
+  <pre><code class="python hljs">
+import os
+from project import function_that_calls_remove
+
+def fake_remove(path):
+    print(f"Removing {path}")
+
+def test_remove():
+    os.remove = fake_remove  # Replace os.remove.
+    function_that_calls_remove()  # Print path.
+  </code></pre>
+  <p>
+    Une gestion manuelle peut facilement entraîner des effet de bord
+    indésirables !
+  </p>
+</section><section>
+  <h3>Exemple de monkey patching avec Pytest</h3>
+  <p>
+    Pytest s’assure d’enlever le <em>monkey patching</em> en fin d’exécution du
+    test.
+  </p>
+  <pre><code class="python hljs">
+import os
+from project import function_that_calls_remove
+
+def fake_remove(path):
+    print(f"Removing {path}")
+
+def test_remove(monkeypatch):
+    monkeypatch.setattr(os, "remove", fake_remove)
+    function_that_calls_remove()  # Print path.
+  </code></pre>
+</section><section>
+  <h3>Fixtures</h3>
+  <p>
+    Des variables peuvent automatiquement être définies à l’appel d’une
+    fonction de test : elles sont appelées des <em>fixtures</em>.
+  </p>
+  <p>
+    Pytest en propose
+    <a href="https://docs.pytest.org/en/stable/reference/fixtures.html">une liste par défaut</a>,
+    parmi lesquelles :
+  </p>
+  <ul>
+    <li><code>monkeypatch</code> pour effectuer du <em>monkey patching</em>,</li>
+    <li><code>cache</code> pour garder en mémoire certaines informations sur plusieurs séries de tests,</li>
+    <li><code>tmp_path</code> pour créer un dossier temporaire…</li>
+  </ul>
+</section><section>
+  <h3>Configuration des tests</h3>
+  <p>
+    <strong>Il est possible de configurer tous ou une partie des tests avec un fichier <code>conftest.py</code>.</strong>
+    Ce fichier peut par exemple être utilisé pour définir des <em>fixtures</em> qui
+    seront disponibles automatiquement pour les autres tests.
+  </p>
+  <pre><code class="python hljs">
+import random
+import pytest
+
+@pytest.fixture
+def random_number():
+    return random.randint(1, 6)
+  </code></pre>
+</section><section>
+  <h3>Injection de dépendances</h3>
+  <p>
+    Plutôt que d’utiliser des <em>mocks</em> et des <em>monkey patchs</em>,
+    <strong>une bonne pratique consiste à injecter les dépendances</strong>
+    dans le code qui a besoin de fonctions qui peuvent être amenées à varier
+    selon le contexte.
+  </p>
+</section><section>
+  <h3>Exemple d’injection de dépendances</h3>
+  <pre><code class="python hljs">
+import requests
+
+def get_http_text(url):  # No dependency injection.
+    print("Hello!")
+    text = requests.get(url).text
+    print("Goodbye!")
+    return text
+  </code></pre>
+  <pre><code class="python hljs">
+import requests
+
+def get_http_text(url, get=requests.get):  # Dependency injection.
+    print("Hello!")
+    text = get(url).text
+    print("Goodbye!")
+    return text
+  </code></pre>
+</section><section>
+  <h2>Pour aller plus loin</h2>
+</section><section>
+  <h3>Vol 501 d’Ariane 5</h3>
+  <p>
+    <strong>
+      Le vol inaugural d’Ariane 5 est un exemple marquant de l’intérêt, de la
+      complexité, de la subtilité et de la difficulté à effectuer des tests
+      utiles.
+    </strong>
+  </p>
+  <p>
+    Les
+    <a href="https://fr.wikipedia.org/wiki/Vol_501_d%27Ariane_5#Conclusions">conclusions de la commission d’enquête</a>
+    ont soulevé de nombreux points permettant d’avoir une vision complète des
+    causes de l’accident, de l’importance des tests, et des axes
+    d’améliorations dans un domaine où les pratiques sont déjà excellentes.
+  </p>
+</section><section>
+  <h3>Liens utiles</h3>
+  <ul>
+    <li><a href="https://docs.pytest.org/">Pytest</a></li>
+    <li><a href="https://pythontest.com/">Le blog de Brian Okken</a>, avec des nouvelles et des liens sur les tests en Python</li>
+    <li><a href="https://realpython.com/python-testing/">Real Python</a></li>
+  </ul>
+</section>
